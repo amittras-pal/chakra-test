@@ -6,4 +6,5 @@ export const ENDPOINTS = {
   popularPeople: "/person/popular",
   movieById: "/movie/",
   showById: "/tv/",
+  trendingToday: "/trending/all/day",
 };
