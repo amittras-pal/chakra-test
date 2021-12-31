@@ -10,10 +10,11 @@ import {
   ModalOverlay,
 } from "@chakra-ui/react";
 import { FormikProvider, useFormik } from "formik";
+import * as Yup from "yup";
 import React, { useState } from "react";
 import { MdSearch } from "react-icons/md";
-import ButtonGroupRadio from "../Form/ButtonGroupRadio";
 import { globalSearchCategories } from "../../../constants/appConstants";
+import ButtonGroupRadio from "../Form/ButtonGroupRadio";
 import TextInput from "../Form/TextInput";
 
 const GlobalSearch = ({ usedAtHome }) => {
@@ -31,6 +32,9 @@ const GlobalSearch = ({ usedAtHome }) => {
       searchTerm: "",
       searchCategory: globalSearchCategories[0].value,
     },
+    validationSchema: Yup.object({
+      searchTerm: Yup.string().required("Please enter some text."),
+    }),
     onSubmit: (values) => console.log(values),
   });
 
@@ -87,6 +91,7 @@ const GlobalSearch = ({ usedAtHome }) => {
                 </Button>
                 <Button
                   type="submit"
+                  disabled={!globalSearch.isValid}
                   size={"sm"}
                   variant={"solid"}
                   colorScheme={"red"}>
