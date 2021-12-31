@@ -21,6 +21,7 @@ import React from "react";
 import { MdDarkMode, MdLightMode, MdMenu } from "react-icons/md";
 import { Link as RouteLink } from "react-router-dom";
 import routerMenu from "../../constants/routerMenu";
+import GlobalSearch from "../shared/GlobalSearch/GlobalSearch";
 
 function AppHeader() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -32,6 +33,7 @@ function AppHeader() {
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
           <HStack alignItems={"center"} spacing={4}>
             <IconButton
+              variant={"ghost"}
               size={"sm"}
               icon={<MdMenu />}
               aria-label={"Open Menu"}
@@ -41,12 +43,15 @@ function AppHeader() {
               ShowSurfer.
             </Heading>
           </HStack>
-          <IconButton
-            size={"sm"}
-            icon={colorMode === "light" ? <MdDarkMode /> : <MdLightMode />}
-            aria-label={"Change Color Theme"}
-            onClick={toggleColorMode}
-          />
+          <HStack alignItems={"center"} spacing={2}>
+            <IconButton
+              size={"sm"}
+              icon={colorMode === "light" ? <MdDarkMode /> : <MdLightMode />}
+              aria-label={"Change Color Theme"}
+              onClick={toggleColorMode}
+            />
+            <GlobalSearch />
+          </HStack>
         </Flex>
       </Box>
       <Drawer placement={"left"} onClose={onClose} isOpen={isOpen}>
