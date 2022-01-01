@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Divider,
   Drawer,
   DrawerBody,
@@ -14,20 +15,33 @@ import {
   List,
   ListIcon,
   ListItem,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
   Text,
   useColorMode,
   useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
 import React from "react";
-import { MdDarkMode, MdLightMode, MdMenu } from "react-icons/md";
-import { Link as RouteLink } from "react-router-dom";
+import {
+  MdArrowDropDown,
+  MdDarkMode,
+  MdLightMode,
+  MdMenu,
+} from "react-icons/md";
+import { Link as RouteLink, useNavigate } from "react-router-dom";
 import routerMenu from "../../constants/routerMenu";
-import GlobalSearch from "../shared/GlobalSearch/GlobalSearch";
 
 function AppHeader() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { colorMode, toggleColorMode } = useColorMode();
+  const navigate = useNavigate();
+
+  const navigateToDiscover = (type, sort_by) => {
+    navigate(`/discover/${type}`, { state: { sort_by } });
+  };
 
   return (
     <>
@@ -51,13 +65,34 @@ function AppHeader() {
             </Heading>
           </HStack>
           <HStack alignItems={"center"} spacing={2}>
+            <Menu>
+              <MenuButton
+                as={Button}
+                size={"sm"}
+                rightIcon={<MdArrowDropDown />}>
+                Movies
+              </MenuButton>
+              <MenuList maxW={"fit-content"}>
+                <MenuItem
+                  onClick={() =>
+                    navigateToDiscover("movie", "popularity.desc")
+                  }>
+                  Popular
+                </MenuItem>
+                <MenuItem
+                  onClick={() =>
+                    navigateToDiscover("movie", "release_date.desc")
+                  }>
+                  Latest
+                </MenuItem>
+              </MenuList>
+            </Menu>
             <IconButton
               size={"sm"}
               icon={colorMode === "light" ? <MdDarkMode /> : <MdLightMode />}
               aria-label={"Change Color Theme"}
               onClick={toggleColorMode}
             />
-            <GlobalSearch />
           </HStack>
         </Flex>
       </Box>

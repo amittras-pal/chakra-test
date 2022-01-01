@@ -12,12 +12,14 @@ import {
 import { FormikProvider, useFormik } from "formik";
 import React, { useState } from "react";
 import { MdSearch } from "react-icons/md";
+import { createSearchParams, useNavigate } from "react-router-dom";
 import { globalSearchCategories } from "../../../constants/appConstants";
 import ButtonGroupRadio from "../Form/ButtonGroupRadio";
 import TextInput from "../Form/TextInput";
 
 const GlobalSearch = ({ usedAtHome }) => {
   const [showGlobalSearch, setShowGlobalSearch] = useState(false);
+  const navigate = useNavigate();
   const openSearch = () => {
     setShowGlobalSearch(true);
   };
@@ -38,7 +40,12 @@ const GlobalSearch = ({ usedAtHome }) => {
           "Please enter some search text."
         );
       else {
-        console.log(values);
+        navigate(
+          `/discover/${values.searchCategory}?${createSearchParams({
+            q: values.searchTerm,
+          })}`
+        );
+        if (!usedAtHome) closeSearch();
       }
     },
   });

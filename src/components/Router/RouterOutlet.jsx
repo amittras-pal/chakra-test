@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
+import Movies from "../Views/Discover/Movies";
 import Home from "../Views/Home/Home";
 import MovieDetails from "../Views/MovieDetails/MovieDetails";
 import MoviesList from "../Views/MoviesList/MoviesList";
@@ -14,6 +15,7 @@ function RouterOutlet() {
       <Route path="/tv" element={<ShowsList />} />
       <Route path="/movie/:id" element={<MovieDetails />} />
       <Route path="/tv/:id" element={<ShowDetails />} />
+      <Route path="discover/movie" element={<Movies />} />
     </Routes>
   );
 }

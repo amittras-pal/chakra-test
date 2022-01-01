@@ -10,7 +10,6 @@ import { APP_TITLE } from "../../../constants/appConstants";
 import { useApiConfig } from "../../../hooks/configuration.query";
 import { useAllTrendingToday } from "../../../hooks/trending.query";
 import { getRandomHeaderImg, setPageTitle } from "../../../utils/utils";
-import GlobalSearch from "../../shared/GlobalSearch/GlobalSearch";
 import TrendingMovies from "./Sections/TrendingMovies";
 import TrendingShows from "./Sections/TrendingShows";
 
@@ -51,7 +50,6 @@ function Home() {
         <Text textAlign={"center"} fontWeight={"bold"} mb={"8"}>
           Millions of movies, TV shows and people to discover. Explore now.
         </Text>
-        <GlobalSearch usedAtHome />
       </Container>
       <Container maxW={"container.xl"} mt={5}>
         <TrendingMovies />
