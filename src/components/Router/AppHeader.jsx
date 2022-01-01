@@ -4,6 +4,7 @@ import {
   Drawer,
   DrawerBody,
   DrawerContent,
+  DrawerFooter,
   DrawerHeader,
   DrawerOverlay,
   Flex,
@@ -13,6 +14,7 @@ import {
   List,
   ListIcon,
   ListItem,
+  Text,
   useColorMode,
   useColorModeValue,
   useDisclosure,
@@ -29,7 +31,12 @@ function AppHeader() {
 
   return (
     <>
-      <Box bg={useColorModeValue("gray.100", "red.900")} px={4}>
+      <Box
+        bg={useColorModeValue("gray.100", "red.900")}
+        px={4}
+        position={"sticky"}
+        top={0}
+        zIndex={100}>
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
           <HStack alignItems={"center"} spacing={4}>
             <IconButton
@@ -85,6 +92,15 @@ function AppHeader() {
               ))}
             </List>
           </DrawerBody>
+          <DrawerFooter
+            display={"flex"}
+            justifyContent={"center"}
+            alignItems={"center"}
+            borderTopWidth={"1px"}>
+            <Text colorScheme={"red"} size="sm">
+              Powered By: themoviedb.org
+            </Text>
+          </DrawerFooter>
         </DrawerContent>
       </Drawer>
     </>

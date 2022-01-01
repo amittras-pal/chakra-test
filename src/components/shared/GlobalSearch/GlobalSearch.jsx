@@ -10,7 +10,6 @@ import {
   ModalOverlay,
 } from "@chakra-ui/react";
 import { FormikProvider, useFormik } from "formik";
-import * as Yup from "yup";
 import React, { useState } from "react";
 import { MdSearch } from "react-icons/md";
 import { globalSearchCategories } from "../../../constants/appConstants";
@@ -32,10 +31,16 @@ const GlobalSearch = ({ usedAtHome }) => {
       searchTerm: "",
       searchCategory: globalSearchCategories[0].value,
     },
-    validationSchema: Yup.object({
-      searchTerm: Yup.string().required("Please enter some text."),
-    }),
-    onSubmit: (values) => console.log(values),
+    onSubmit: (values) => {
+      if (!values.searchTerm)
+        globalSearch.setFieldError(
+          "searchTerm",
+          "Please enter some search text."
+        );
+      else {
+        console.log(values);
+      }
+    },
   });
 
   return (
@@ -55,7 +60,7 @@ const GlobalSearch = ({ usedAtHome }) => {
 
       <Modal isOpen={showGlobalSearch} onClose={closeSearch}>
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent maxW={"95%"}>
           <ModalHeader>Search Movies, TV or People</ModalHeader>
           <FormikProvider value={globalSearch}>
             <form onSubmit={globalSearch.handleSubmit}>
