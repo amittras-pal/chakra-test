@@ -9,8 +9,10 @@ import React from "react";
 import { APP_TITLE } from "../../../constants/appConstants";
 import { useApiConfig } from "../../../hooks/configuration.query";
 import { useAllTrendingToday } from "../../../hooks/trending.query";
-import { setPageTitle } from "../../../utils/utils";
+import { getRandomHeaderImg, setPageTitle } from "../../../utils/utils";
 import GlobalSearch from "../../shared/GlobalSearch/GlobalSearch";
+import TrendingMovies from "./Sections/TrendingMovies";
+import TrendingShows from "./Sections/TrendingShows";
 
 function Home() {
   setPageTitle("");
@@ -27,29 +29,35 @@ function Home() {
   if (loadingConfig) return <Progress isIndeterminate />;
 
   return (
-    <Container
-      maxW={"full"}
-      minH={"20rem"}
-      p={"6"}
-      display={"flex"}
-      flexDirection={"column"}
-      justifyContent={"center"}
-      bgSize={"cover"}
-      backgroundImage={`${bgTint}, ${
-        trendingToday
-          ? `url(${config?.data?.images?.secure_base_url}w1280${trendingToday?.data?.results[0].backdrop_path})`
-          : ""
-      }`}
-      bgPosition={"center"}
-      bgRepeat={"no-repeat"}>
-      <Heading size={"xl"} textAlign={"center"}>
-        Welcome to {APP_TITLE}.
-      </Heading>
-      <Text textAlign={"center"} fontWeight={"bold"} mb={"8"}>
-        Millions of movies, TV shows and people to discover. Explore now.
-      </Text>
-      <GlobalSearch usedAtHome />
-    </Container>
+    <>
+      <Container
+        maxW={"full"}
+        minH={"20rem"}
+        p={"6"}
+        display={"flex"}
+        flexDirection={"column"}
+        justifyContent={"center"}
+        bgSize={"cover"}
+        backgroundImage={`${bgTint}, ${
+          trendingToday
+            ? getRandomHeaderImg(config, trendingToday?.data?.results)
+            : ""
+        }`}
+        bgPosition={"center"}
+        bgRepeat={"no-repeat"}>
+        <Heading size={"xl"} textAlign={"center"}>
+          Welcome to {APP_TITLE}.
+        </Heading>
+        <Text textAlign={"center"} fontWeight={"bold"} mb={"8"}>
+          Millions of movies, TV shows and people to discover. Explore now.
+        </Text>
+        <GlobalSearch usedAtHome />
+      </Container>
+      <Container maxW={"container.xl"} mt={5}>
+        <TrendingMovies />
+        <TrendingShows />
+      </Container>
+    </>
   );
 }
 

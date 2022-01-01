@@ -1,6 +1,10 @@
 import { useQuery } from "react-query";
-import { getTrendingToday } from "../api/trending";
+import { getAllTrendingToday, getTrendingToday } from "../api/trending";
 
 export function useAllTrendingToday() {
-  return useQuery("trending-today", getTrendingToday);
+  return useQuery("trending-today", getAllTrendingToday);
+}
+
+export function useTrendingToday(mediaType) {
+  return useQuery(["trending", mediaType], () => getTrendingToday(mediaType));
 }

@@ -7,4 +7,7 @@ export const ENDPOINTS = {
   movieById: "/movie/",
   showById: "/tv/",
   trendingToday: "/trending/all/day",
+  trendingMoviesToday: "/trending/movie/day",
+  trendingShowsToday: "/trending/tv/day",
+  trendingPeopleToday: "/trending/person/day",
 };
