@@ -38,7 +38,7 @@ function MediaTile({ mediaType, data }) {
             layout={"fill"}
           />
           <Circle
-            bgColor={colorMode === "dark" ? "red.500" : "red.200"}
+            bgColor={colorMode === "dark" ? "red.200" : "red.500"}
             borderColor={colorMode === "dark" ? "gray.800" : "white"}
             padding={2}
             borderRadius={"full"}
@@ -50,7 +50,11 @@ function MediaTile({ mediaType, data }) {
             w={"2.3rem"}
             h={"2.3rem"}
             fontSize={"14px"}>
-            <Text>{data?.vote_average}</Text>
+            <Text
+              color={colorMode === "dark" ? "gray.800" : "gray.100"}
+              fontWeight={"bold"}>
+              {data?.vote_average}
+            </Text>
           </Circle>
         </Box>
         <Stack mt={4}>

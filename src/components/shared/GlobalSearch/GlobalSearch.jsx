@@ -60,7 +60,7 @@ const GlobalSearch = ({ usedAtHome }) => {
 
       <Modal isOpen={showGlobalSearch} onClose={closeSearch}>
         <ModalOverlay />
-        <ModalContent maxW={"95%"}>
+        <ModalContent maxW={"95%"} w={"container.sm"}>
           <ModalHeader>Search Movies, TV or People</ModalHeader>
           <FormikProvider value={globalSearch}>
             <form onSubmit={globalSearch.handleSubmit}>
