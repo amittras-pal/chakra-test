@@ -12,4 +12,5 @@ export const ENDPOINTS = {
   trendingPeopleToday: "/trending/person/day",
   movieGenres: "/genre/movie/list",
   tvGenres: "/genre/tv/list",
+  discover: "/discover/",
 };

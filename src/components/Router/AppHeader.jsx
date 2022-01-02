@@ -46,7 +46,7 @@ function AppHeader() {
   return (
     <>
       <Box
-        bg={useColorModeValue("gray.100", "red.900")}
+        bg={useColorModeValue("gray.200", "red.900")}
         px={4}
         position={"sticky"}
         top={0}
@@ -54,7 +54,6 @@ function AppHeader() {
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
           <HStack alignItems={"center"} spacing={4}>
             <IconButton
-              variant={"ghost"}
               size={"sm"}
               icon={<MdMenu />}
               aria-label={"Open Menu"}

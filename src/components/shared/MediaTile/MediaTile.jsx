@@ -22,19 +22,25 @@ function MediaTile({ mediaType, data }) {
 
   return (
     <Box
-      maxW={"12rem"}
-      minW={"12rem"}
+      maxW={"11rem"}
+      minW={"11rem"}
       h={"auto"}
       boxShadow={"lg"}
       rounded={"md"}
       borderWidth={"thin"}
       padding={4}
-      overflow={"visible"}>
-      <Link to={`/${mediaType}/${data.id}`}>
-        <Box mt={-4} mx={-4} pos={"relative"} minH={"16rem"}>
+      overflow={"visible"}
+      style={{ transition: "all 0.25s ease-in-out" }}
+      _focusWithin={{ borderColor: "blue.300", transform: "translateY(-10px)" }}
+      _hover={{
+        borderColor: "blue.300",
+        transform: "translateY(-10px)",
+      }}>
+      <Link to={`/${mediaType}/${data.id}`} style={{ outline: "none" }}>
+        <Box mt={-4} mx={-4} pos={"relative"} minH={"14rem"}>
           <Image
             rounded={"md"}
-            src={`${config?.data?.images.secure_base_url}w500${data?.poster_path}`}
+            src={`${config?.data?.images.secure_base_url}w342${data?.poster_path}`}
             layout={"fill"}
           />
           <Circle
@@ -58,8 +64,8 @@ function MediaTile({ mediaType, data }) {
           </Circle>
         </Box>
         <Stack mt={4}>
-          <Heading size={"sm"}>{titleString}</Heading>
-          <Text color={"gray.500"} fontSize={"sm"}>
+          <Heading size={"xs"}>{titleString}</Heading>
+          <Text color={"gray.500"} fontSize={"xs"}>
             {dateString}
           </Text>
         </Stack>
