@@ -1,3 +1,4 @@
+import { DateTime } from "luxon";
 import { APP_TITLE } from "../constants/appConstants";
 
 export function setPageTitle(title) {
@@ -16,4 +17,8 @@ export function removeFalsyKeys(obj) {
     if (obj[key] && obj[key].toString()) cleaned[key] = obj[key];
   });
   return cleaned;
+}
+
+export function getFormattedDate(date, format) {
+  return date ? DateTime.fromISO(date).toLocaleString(format) : null;
 }
