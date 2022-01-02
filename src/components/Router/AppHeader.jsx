@@ -46,7 +46,7 @@ function AppHeader() {
   return (
     <>
       <Box
-        bg={useColorModeValue("gray.200", "red.900")}
+        bg={useColorModeValue("gray.200", "red.800")}
         px={4}
         position={"sticky"}
         top={0}

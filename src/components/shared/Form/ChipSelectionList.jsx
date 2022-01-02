@@ -39,7 +39,7 @@ function ChipSelectionList({ name, options, form, label }) {
           <SelectionChip
             key={option.id}
             {...getCheckboxProps()}
-            isChecked={form.values[name].includes(option.id)}
+            isChecked={form.values[name]?.includes(option.id)}
             value={option.id}
             label={option.name}
           />
