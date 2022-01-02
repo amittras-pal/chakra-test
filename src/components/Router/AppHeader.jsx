@@ -1,9 +1,13 @@
 import {
+  Accordion,
+  AccordionButton,
+  AccordionItem,
+  AccordionPanel,
   Box,
   Button,
-  Divider,
   Drawer,
   DrawerBody,
+  DrawerCloseButton,
   DrawerContent,
   DrawerFooter,
   DrawerHeader,
@@ -28,11 +32,14 @@ import React from "react";
 import {
   MdArrowDropDown,
   MdDarkMode,
+  MdHome,
+  MdInfo,
   MdLightMode,
+  MdLocalFireDepartment,
   MdMenu,
+  MdOfflineBolt,
 } from "react-icons/md";
-import { Link as RouteLink, useNavigate } from "react-router-dom";
-import routerMenu from "../../constants/routerMenu";
+import { useNavigate } from "react-router-dom";
 
 function AppHeader() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -41,6 +48,12 @@ function AppHeader() {
 
   const navigateToDiscover = (type, sort_by) => {
     navigate(`/discover/${type}`, { state: { sort_by } });
+    if (isOpen) onClose();
+  };
+
+  const navigateToHome = () => {
+    navigate("/");
+    if (isOpen) onClose();
   };
 
   return (
@@ -55,7 +68,17 @@ function AppHeader() {
           <HStack alignItems={"center"} spacing={4}>
             <IconButton
               size={"sm"}
-              icon={<MdMenu />}
+              variant={"ghost"}
+              icon={
+                <MdMenu
+                  style={{
+                    transform: "translateX(65%)",
+                  }}
+                />
+              }
+              display={{
+                md: "none",
+              }}
               aria-label={"Open Menu"}
               onClick={isOpen ? onClose : onOpen}
             />
@@ -64,28 +87,30 @@ function AppHeader() {
             </Heading>
           </HStack>
           <HStack alignItems={"center"} spacing={2}>
-            <Menu>
-              <MenuButton
-                as={Button}
-                size={"sm"}
-                rightIcon={<MdArrowDropDown />}>
-                Movies
-              </MenuButton>
-              <MenuList maxW={"fit-content"}>
-                <MenuItem
-                  onClick={() =>
-                    navigateToDiscover("movie", "popularity.desc")
-                  }>
-                  Popular
-                </MenuItem>
-                <MenuItem
-                  onClick={() =>
-                    navigateToDiscover("movie", "release_date.desc")
-                  }>
-                  Latest
-                </MenuItem>
-              </MenuList>
-            </Menu>
+            <Box display={{ base: "none", md: "block" }}>
+              <Menu>
+                <MenuButton
+                  as={Button}
+                  size={"sm"}
+                  rightIcon={<MdArrowDropDown />}>
+                  Movies
+                </MenuButton>
+                <MenuList maxW={"fit-content"}>
+                  <MenuItem
+                    onClick={() =>
+                      navigateToDiscover("movie", "popularity.desc")
+                    }>
+                    Popular
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() =>
+                      navigateToDiscover("movie", "release_date.desc")
+                    }>
+                    Latest
+                  </MenuItem>
+                </MenuList>
+              </Menu>
+            </Box>
             <IconButton
               size={"sm"}
               icon={colorMode === "light" ? <MdDarkMode /> : <MdLightMode />}
@@ -98,32 +123,58 @@ function AppHeader() {
       <Drawer placement={"left"} onClose={onClose} isOpen={isOpen}>
         <DrawerOverlay />
         <DrawerContent>
-          <DrawerHeader borderBottomWidth={"1px"}>ShowSurfer.</DrawerHeader>
+          <DrawerHeader
+            borderBottomWidth={"1px"}
+            display={"flex"}
+            alignItems={"center"}>
+            <Heading size={"sm"}>ShowSurfer.</Heading>
+            <DrawerCloseButton />
+          </DrawerHeader>
           <DrawerBody p={0}>
             <List>
-              {routerMenu.map((section) => (
-                <React.Fragment key={section.sectionId}>
-                  {section.sectionItems.map((link) => (
-                    <RouteLink
-                      to={link.routePath}
-                      key={link.routePath}
-                      onClick={onClose}>
-                      <ListItem
-                        p={4}
-                        display={"flex"}
-                        alignItems={"center"}
-                        _hover={{
-                          bg: colorMode === "light" ? "gray.200" : "gray.600",
-                        }}
-                        cursor={"pointer"}>
-                        <ListIcon as={link.routeIcon} mr={4} />{" "}
-                        {link.routeLabel}
-                      </ListItem>
-                    </RouteLink>
-                  ))}
-                  <Divider />
-                </React.Fragment>
-              ))}
+              <ListItem p={3} onClick={navigateToHome}>
+                <ListIcon as={MdHome} />
+                Home
+              </ListItem>
+            </List>
+            <Accordion allowToggle defaultIndex={[0]}>
+              <AccordionItem>
+                <AccordionButton
+                  disabled
+                  display={"flex"}
+                  justifyContent={"space-between"}
+                  alignItems={"center"}>
+                  <Text m={0} fontWeight={"bold"}>
+                    Movies
+                  </Text>
+                </AccordionButton>
+                <AccordionPanel p={0}>
+                  <List>
+                    <ListItem
+                      p={3}
+                      onClick={() =>
+                        navigateToDiscover("movie", "popularity.desc")
+                      }>
+                      <ListIcon as={MdLocalFireDepartment} />
+                      Popular
+                    </ListItem>
+                    <ListItem
+                      p={3}
+                      onClick={() =>
+                        navigateToDiscover("movie", "release_date.desc")
+                      }>
+                      <ListIcon as={MdOfflineBolt} />
+                      Latest
+                    </ListItem>
+                  </List>
+                </AccordionPanel>
+              </AccordionItem>
+            </Accordion>
+            <List>
+              <ListItem p={3}>
+                <ListIcon as={MdInfo} />
+                About
+              </ListItem>
             </List>
           </DrawerBody>
           <DrawerFooter

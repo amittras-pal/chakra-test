@@ -1,5 +1,5 @@
 import { MdHome, MdInfo, MdLiveTv, MdMovie } from "react-icons/md";
-
+// File is unused, let's find a way to make this work too.
 const routerMenu = [
   {
     sectionId: 1,
