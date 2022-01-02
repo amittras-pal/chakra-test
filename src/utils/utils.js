@@ -9,3 +9,11 @@ export function getRandomHeaderImg(config, results) {
   return `url(${config?.data?.images?.secure_base_url}w1280${results[0].backdrop_path})`;
   // results[Math.floor(Math.random() * results.length)].backdrop_path;
 }
+
+export function removeFalsyKeys(obj) {
+  const cleaned = {};
+  Object.keys(obj).forEach((key) => {
+    if (obj[key] && obj[key].toString()) cleaned[key] = obj[key];
+  });
+  return cleaned;
+}

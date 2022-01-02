@@ -18,7 +18,6 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { FormikProvider, useFormik } from "formik";
-import { DateTime } from "luxon";
 import React from "react";
 import {
   MdCheck,
@@ -28,15 +27,16 @@ import {
   MdFilterAlt,
 } from "react-icons/md";
 import { useLocation } from "react-router-dom";
+import { MOVIE_SORT_MODES } from "../../../constants/appConstants";
+import { useMovieGenres } from "../../../hooks/genre.query";
 import { setPageTitle } from "../../../utils/utils";
+import ChipSelectionList from "../../shared/Form/ChipSelectionList";
 import SelectDropdown from "../../shared/Form/SelectDropdown";
 import Switch from "../../shared/Form/Switch";
 
 function Movies() {
   const { state } = useLocation();
   const { isOpen, onClose, onOpen } = useDisclosure();
-  setPageTitle("[Movies] - Explore");
-
   const filterForm = useFormik({
     initialValues: {
       sort_by: state.sort_by,
@@ -44,21 +44,17 @@ function Movies() {
       with_genres: [],
       "vote_average.gte": 0,
       "release_date.gte": "",
-      "release_date.lte": DateTime.now().toISO(),
+      "release_date.lte": "",
+    },
+    onSubmit: (values) => {
+      const payload = { ...values, with_genres: values.with_genres.join(",") };
+      console.log(payload);
     },
   });
 
-  const sortOptions = [
-    { label: "Popularity Ascending", value: "popularity.asc" },
-    { label: "Popularity Descending", value: "popularity.desc" },
-    { label: "Release Date Ascending", value: "release_date.asc" },
-    { label: "Release Date Descending", value: "release_date.desc" },
-    { label: "Vote Average Ascending", value: "vote_average.asc" },
-    { label: "Vote Average Descending", value: "vote_average.desc" },
-    { label: "Vote Count Ascending", value: "vote_count.asc" },
-    { label: "Vote Count Descending", value: "vote_count.desc" },
-  ];
+  const { data: genre, isLoading: loadingGenres } = useMovieGenres();
 
+  setPageTitle("[Movies] - Explore");
   return (
     <>
       <Container width={"full"} p={5} maxW={"full"}>
@@ -87,7 +83,7 @@ function Movies() {
           <DrawerBody p={0}>
             <FormikProvider value={filterForm}>
               <form>
-                <Accordion defaultIndex={[0]} allowMultiple>
+                <Accordion defaultIndex={[1]} allowMultiple>
                   <AccordionItem>
                     {({ isExpanded }) => (
                       <>
@@ -106,7 +102,7 @@ function Movies() {
                             size={"sm"}
                             borderRadius={"md"}
                             name={"sort_by"}
-                            options={sortOptions}
+                            options={MOVIE_SORT_MODES}
                           />
                         </AccordionPanel>
                       </>
@@ -125,6 +121,15 @@ function Movies() {
                           {isExpanded ? <MdExpandLess /> : <MdExpandMore />}
                         </AccordionButton>
                         <AccordionPanel p={3}>
+                          <ChipSelectionList
+                            name="with_genres"
+                            options={genre?.data?.genres.map((g) => ({
+                              ...g,
+                              id: String(g.id),
+                            }))}
+                            label="Genres"
+                            form={filterForm}
+                          />
                           <Switch
                             name="include_adult"
                             label="Include Adult?"
@@ -149,6 +154,7 @@ function Movies() {
               Clear All
             </Button>
             <Button
+              onClick={filterForm.handleSubmit}
               size={"sm"}
               variant={"solid"}
               colorScheme={"red"}

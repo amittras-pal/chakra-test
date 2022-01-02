@@ -10,4 +10,6 @@ export const ENDPOINTS = {
   trendingMoviesToday: "/trending/movie/day",
   trendingShowsToday: "/trending/tv/day",
   trendingPeopleToday: "/trending/person/day",
+  movieGenres: "/genre/movie/list",
+  tvGenres: "/genre/tv/list",
 };
