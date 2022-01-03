@@ -98,7 +98,7 @@ function MediaTileWithInfo({ mediaType, data, showMediaType }) {
           <Text
             color={colorMode === "dark" ? "gray.800" : "gray.100"}
             fontWeight={"bold"}>
-            {data?.vote_average ? data?.vote_average : "!"}
+            {data?.vote_average ? data?.vote_average : "NR"}
           </Text>
         </Circle>
       </Box>
