@@ -30,24 +30,24 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import {
-  MdArrowDropDown,
   MdDarkMode,
+  MdExpandLess,
+  MdExpandMore,
   MdHome,
   MdInfo,
   MdLightMode,
-  MdLocalFireDepartment,
   MdMenu,
-  MdOfflineBolt,
 } from "react-icons/md";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import exploreRouterMenu from "../../constants/routerMenu";
 
 function AppHeader() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { colorMode, toggleColorMode } = useColorMode();
   const navigate = useNavigate();
 
-  const navigateToDiscover = (type, sort_by) => {
-    navigate(`/discover/${type}`, { state: { sort_by } });
+  const navigateToDiscover = (type, filter) => {
+    navigate(`/discover/${type}`, { state: filter });
     if (isOpen) onClose();
   };
 
@@ -82,34 +82,39 @@ function AppHeader() {
               aria-label={"Open Menu"}
               onClick={isOpen ? onClose : onOpen}
             />
-            <Heading as="h1" fontWeight={"normal"} size={"md"}>
+            <Heading as={Link} to={"/"} fontWeight={"normal"} size={"md"}>
               ShowSurfer.
             </Heading>
           </HStack>
           <HStack alignItems={"center"} spacing={2}>
             <Box display={{ base: "none", md: "block" }}>
-              <Menu>
-                <MenuButton
-                  as={Button}
-                  size={"sm"}
-                  rightIcon={<MdArrowDropDown />}>
-                  Movies
-                </MenuButton>
-                <MenuList maxW={"fit-content"}>
-                  <MenuItem
-                    onClick={() =>
-                      navigateToDiscover("movie", "popularity.desc")
-                    }>
-                    Popular
-                  </MenuItem>
-                  <MenuItem
-                    onClick={() =>
-                      navigateToDiscover("movie", "release_date.desc")
-                    }>
-                    Latest
-                  </MenuItem>
-                </MenuList>
-              </Menu>
+              {exploreRouterMenu.map((menu) => (
+                <Menu key={menu.sectionId}>
+                  <MenuButton
+                    as={Button}
+                    size={"sm"}
+                    ml={2}
+                    rightIcon={<MdExpandMore />}>
+                    {menu.sectionLabel}
+                  </MenuButton>
+                  <MenuList maxW={"fit-content"}>
+                    {menu.sectionItems.map((menuItem) => {
+                      const { label, path, passState, Icon } = menuItem;
+                      return (
+                        <MenuItem
+                          key={label}
+                          onClick={() => navigateToDiscover(path, passState)}>
+                          <Icon
+                            size={"1.25em"}
+                            style={{ marginRight: "1rem" }}
+                          />
+                          {label}
+                        </MenuItem>
+                      );
+                    })}
+                  </MenuList>
+                </Menu>
+              ))}
             </Box>
             <IconButton
               size={"sm"}
@@ -137,38 +142,50 @@ function AppHeader() {
                 Home
               </ListItem>
             </List>
-            <Accordion allowToggle defaultIndex={[0]}>
-              <AccordionItem>
-                <AccordionButton
-                  disabled
-                  display={"flex"}
-                  justifyContent={"space-between"}
-                  alignItems={"center"}>
-                  <Text m={0} fontWeight={"bold"}>
-                    Movies
-                  </Text>
-                </AccordionButton>
-                <AccordionPanel p={0}>
-                  <List>
-                    <ListItem
-                      p={3}
-                      onClick={() =>
-                        navigateToDiscover("movie", "popularity.desc")
-                      }>
-                      <ListIcon as={MdLocalFireDepartment} />
-                      Popular
-                    </ListItem>
-                    <ListItem
-                      p={3}
-                      onClick={() =>
-                        navigateToDiscover("movie", "release_date.desc")
-                      }>
-                      <ListIcon as={MdOfflineBolt} />
-                      Latest
-                    </ListItem>
-                  </List>
-                </AccordionPanel>
-              </AccordionItem>
+            <Accordion allowToggle>
+              {exploreRouterMenu.map((menu) => (
+                <AccordionItem key={menu.sectionId}>
+                  {({ isExpanded }) => (
+                    <>
+                      <AccordionButton
+                        display={"flex"}
+                        justifyContent={"space-between"}
+                        alignItems={"center"}>
+                        <Text m={0} fontWeight={"bold"}>
+                          {menu.sectionLabel}
+                        </Text>
+                        {isExpanded ? <MdExpandLess /> : <MdExpandMore />}
+                      </AccordionButton>
+                      <AccordionPanel p={0}>
+                        <List>
+                          {menu.sectionItems.map((menuItem) => {
+                            const { label, path, passState, Icon } = menuItem;
+                            return (
+                              <ListItem
+                                as={Flex}
+                                p={3}
+                                key={label}
+                                onClick={() =>
+                                  navigateToDiscover(path, passState)
+                                }>
+                                <ListIcon
+                                  as={() =>
+                                    Icon({
+                                      size: "1.25em",
+                                      style: { marginRight: "0.75rem" },
+                                    })
+                                  }
+                                />
+                                <Text mt={-1}>{label}</Text>
+                              </ListItem>
+                            );
+                          })}
+                        </List>
+                      </AccordionPanel>
+                    </>
+                  )}
+                </AccordionItem>
+              ))}
             </Accordion>
             <List>
               <ListItem p={3}>
