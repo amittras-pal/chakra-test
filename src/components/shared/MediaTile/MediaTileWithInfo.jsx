@@ -1,5 +1,6 @@
 import {
   Box,
+  Circle,
   Flex,
   Heading,
   Image,
@@ -81,6 +82,25 @@ function MediaTileWithInfo({ mediaType, data, showMediaType }) {
             </Text>
           </Flex>
         )}
+        <Circle
+          bgColor={colorMode === "dark" ? "red.200" : "red.500"}
+          borderColor={colorMode === "dark" ? "gray.800" : "white"}
+          padding={2}
+          borderRadius={"full"}
+          borderWidth={"4px"}
+          position={"absolute"}
+          right={"0"}
+          top={"10px"}
+          transform={"translateX(50%)"}
+          w={"2.3rem"}
+          h={"2.3rem"}
+          fontSize={"14px"}>
+          <Text
+            color={colorMode === "dark" ? "gray.800" : "gray.100"}
+            fontWeight={"bold"}>
+            {data?.vote_average ? data?.vote_average : "!"}
+          </Text>
+        </Circle>
       </Box>
       <Flex
         padding={3}
