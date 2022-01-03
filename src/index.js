@@ -10,7 +10,7 @@ const queryClient = new QueryClient();
 ReactDOM.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      <ChakraProvider theme={theme}>
+      <ChakraProvider theme={theme} resetCSS={true}>
         <App />
       </ChakraProvider>
     </QueryClientProvider>
