@@ -5,18 +5,17 @@ import {
   Drawer,
   Flex,
   Heading,
-  Progress,
   useColorMode,
   useDisclosure,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { MdFilterAlt } from "react-icons/md";
 import { useLocation } from "react-router-dom";
-import { useMovieGenres } from "../../../hooks/genre.query";
 import { useDiscover } from "../../../hooks/discover.query";
+import { useMovieGenres } from "../../../hooks/genre.query";
 import { setPageTitle } from "../../../utils/utils";
-import MovieFilters from "./MovieFilters";
 import MediaTileWithInfo from "../../shared/MediaTile/MediaTileWithInfo";
+import MovieFilters from "./MovieFilters";
 
 function Movies() {
   const { state } = useLocation();
@@ -32,7 +31,7 @@ function Movies() {
   );
 
   useEffect(() => {
-    setFilters({ ...state });
+    setFilters(state);
   }, [state]);
 
   const applyFilters = (filters) => {
