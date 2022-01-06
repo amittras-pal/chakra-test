@@ -1,14 +1,14 @@
 import {
-  Container,
-  Heading,
-  Progress,
+  Box,
+  Container, Progress,
   Text,
-  useColorMode,
+  useColorMode
 } from "@chakra-ui/react";
 import React from "react";
-import { APP_TITLE } from "../../../constants/appConstants";
 import { useApiConfig } from "../../../hooks/configuration.query";
 import { useAllTrendingToday } from "../../../hooks/trending.query";
+import { ReactComponent as HeroBlack } from "../../../resources/image/hero-black.svg";
+import { ReactComponent as HeroWhite } from "../../../resources/image/hero-white.svg";
 import { getRandomHeaderImg, setPageTitle } from "../../../utils/utils";
 import TrendingMovies from "./Sections/TrendingMovies";
 import TrendingShows from "./Sections/TrendingShows";
@@ -36,6 +36,7 @@ function Home() {
         display={"flex"}
         flexDirection={"column"}
         justifyContent={"center"}
+        alignItems={"center"}
         bgSize={"cover"}
         backgroundImage={`${bgTint}, ${
           trendingToday
@@ -44,9 +45,9 @@ function Home() {
         }`}
         bgPosition={"center"}
         bgRepeat={"no-repeat"}>
-        <Heading size={"xl"} textAlign={"center"}>
-          Welcome to {APP_TITLE}.
-        </Heading>
+        <Box width={{ base: "100%", md: "50%" }} px={4} mb={4}>
+          {colorMode == "dark" ? <HeroWhite /> : <HeroBlack />}
+        </Box>
         <Text textAlign={"center"} fontWeight={"bold"} mb={"8"}>
           Millions of movies, TV shows and people to discover. Explore now.
         </Text>
