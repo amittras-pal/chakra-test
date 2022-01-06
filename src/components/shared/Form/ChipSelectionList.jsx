@@ -7,6 +7,7 @@ import {
   useCheckbox,
   useCheckboxGroup,
 } from "@chakra-ui/react";
+import { useFormikContext } from "formik";
 import React from "react";
 
 function SelectionChip(props) {
@@ -25,12 +26,16 @@ function SelectionChip(props) {
   );
 }
 
-function ChipSelectionList({ name, options, form, label }) {
+function ChipSelectionList({ name, options, label }) {
+  const { getFieldProps, setFieldValue } = useFormikContext();
+  const { value } = getFieldProps();
+
   const { getCheckboxProps } = useCheckboxGroup({
     name,
-    value: form.values[name],
-    onChange: (val) => form.setFieldValue([name], val),
+    value: value[name],
+    onChange: (val) => setFieldValue([name], val),
   });
+
   return (
     <>
       {label && <FormLabel>{label}</FormLabel>}
@@ -39,7 +44,7 @@ function ChipSelectionList({ name, options, form, label }) {
           <SelectionChip
             key={option.id}
             {...getCheckboxProps()}
-            isChecked={form.values[name]?.includes(option.id)}
+            isChecked={value[name]?.includes(option.id)}
             value={option.id}
             label={option.name}
           />

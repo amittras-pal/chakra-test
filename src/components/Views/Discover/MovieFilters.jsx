@@ -51,7 +51,8 @@ function MovieFilters({ filters, genreList, onApplyFilters }) {
                       <AccordionButton
                         display={"flex"}
                         justifyContent={"space-between"}
-                        alignItems={"center"}>
+                        alignItems={"center"}
+                        p={3}>
                         <Text m={0} fontWeight={"bold"}>
                           Sort By
                         </Text>
@@ -75,7 +76,8 @@ function MovieFilters({ filters, genreList, onApplyFilters }) {
                       <AccordionButton
                         display={"flex"}
                         justifyContent={"space-between"}
-                        alignItems={"center"}>
+                        alignItems={"center"}
+                        p={3}>
                         <Text m={0} fontWeight={"bold"}>
                           Filter
                         </Text>
@@ -89,17 +91,15 @@ function MovieFilters({ filters, genreList, onApplyFilters }) {
                             id: String(g.id),
                           }))}
                           label="Genres"
-                          form={filterForm}
                         />
                         <RangeSlider
                           label={"Average User Vote"}
-                          minStepsBetweenThumbs={0.5}
                           min={0}
                           max={10}
                           step={0.5}
+                          minStepsBetweenThumbs={0.5}
                           name_1={"vote_average.gte"}
                           name_2={"vote_average.lte"}
-                          form={filterForm}
                         />
                         <Switch
                           name="include_adult"

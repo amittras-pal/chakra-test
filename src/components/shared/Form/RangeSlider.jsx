@@ -6,15 +6,20 @@ import {
   RangeSliderThumb,
   RangeSliderTrack,
   Text,
+  useColorMode,
 } from "@chakra-ui/react";
+import { useFormikContext } from "formik";
 import React from "react";
 
-function RangeSlider(props) {
-  const { name_1, name_2, label, form, ...sliderProps } = props;
+function RangeSlider({ name_1, name_2, label, ...sliderProps }) {
+  const { colorMode } = useColorMode();
+
+  const { setFieldValue, getFieldProps } = useFormikContext();
+  const { value } = getFieldProps();
 
   const handleChange = ([val1, val2]) => {
-    form.setFieldValue([name_1], val1);
-    form.setFieldValue([name_2], val2);
+    setFieldValue([name_1], val1);
+    setFieldValue([name_2], val2);
   };
 
   return (
@@ -24,19 +29,25 @@ function RangeSlider(props) {
         {...sliderProps}
         colorScheme={"red"}
         onChange={handleChange}
-        value={[form.values[name_1], form.values[name_2]]}
+        value={[value[name_1], value[name_2]]}
         name={[name_1, name_2]}>
         <RangeSliderTrack>
           <RangeSliderFilledTrack />
         </RangeSliderTrack>
         <RangeSliderThumb index={0} boxSize={6}>
-          <Text fontSize={"sm"} fontWeight={"bold"} textColor={"red.500"}>
-            {form.values[name_1]}
+          <Text
+            fontSize={"xs"}
+            fontWeight={"bold"}
+            textColor={colorMode === "dark" ? "gray.800" : "red.500"}>
+            {value[name_1]}
           </Text>
         </RangeSliderThumb>
         <RangeSliderThumb index={1} boxSize={6}>
-          <Text fontSize={"sm"} fontWeight={"bold"} textColor={"red.500"}>
-            {form.values[name_2]}
+          <Text
+            fontSize={"xs"}
+            fontWeight={"bold"}
+            textColor={colorMode === "dark" ? "gray.800" : "red.500"}>
+            {value[name_2]}
           </Text>
         </RangeSliderThumb>
       </ChakraRange>
