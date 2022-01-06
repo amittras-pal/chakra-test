@@ -18,6 +18,7 @@ import React from "react";
 import { MdCheck, MdExpandLess, MdExpandMore } from "react-icons/md";
 import { MOVIE_SORT_MODES } from "../../../constants/appConstants";
 import ChipSelectionList from "../../shared/Form/ChipSelectionList";
+import RangeSlider from "../../shared/Form/RangeSlider";
 import SelectDropdown from "../../shared/Form/SelectDropdown";
 import Switch from "../../shared/Form/Switch";
 
@@ -28,6 +29,7 @@ function MovieFilters({ filters, genreList, onApplyFilters }) {
     },
     onSubmit: onApplyFilters,
   });
+
   return (
     <>
       <DrawerOverlay />
@@ -89,6 +91,16 @@ function MovieFilters({ filters, genreList, onApplyFilters }) {
                           label="Genres"
                           form={filterForm}
                         />
+                        <RangeSlider
+                          label={"Average User Vote"}
+                          minStepsBetweenThumbs={0.5}
+                          min={0}
+                          max={10}
+                          step={0.5}
+                          name_1={"vote_average.gte"}
+                          name_2={"vote_average.lte"}
+                          form={filterForm}
+                        />
                         <Switch
                           name="include_adult"
                           label="Include Adult?"
@@ -102,6 +114,7 @@ function MovieFilters({ filters, genreList, onApplyFilters }) {
               </Accordion>
             </form>
           </FormikProvider>
+          {/* {JSON.stringify(filterForm.values)} */}
         </DrawerBody>
         <DrawerFooter borderTopWidth={"1px"} display={"flex"}>
           <Button
