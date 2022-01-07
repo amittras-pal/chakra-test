@@ -1,17 +1,20 @@
 import {
+  Box,
   Button,
   CircularProgress,
   Container,
   Drawer,
   Flex,
   Heading,
+  Progress,
+  Text,
   useColorMode,
   useDisclosure,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { MdFilterAlt } from "react-icons/md";
 import { useLocation } from "react-router-dom";
-import { useDiscover } from "../../../hooks/discover.query";
+import { useDiscover, useMovieDiscover } from "../../../hooks/discover.query";
 import { useMovieGenres } from "../../../hooks/genre.query";
 import { setPageTitle } from "../../../utils/utils";
 import MediaTileWithInfo from "../../shared/MediaTile/MediaTileWithInfo";
@@ -25,10 +28,13 @@ function Movies() {
   });
   const { isOpen, onClose, onOpen } = useDisclosure();
   const { data: genre, isLoading: loadingGenres } = useMovieGenres();
-  const { data: discover, isLoading: loadingResults } = useDiscover(
-    "movie",
-    filters
-  );
+
+  const { data, hasNextPage, fetchNextPage, isFetchingNextPage, isLoading } =
+    useMovieDiscover(filters);
+
+  const loadMore = () => {
+    fetchNextPage();
+  };
 
   useEffect(() => {
     setFilters(state);
@@ -53,7 +59,9 @@ function Movies() {
           top={"4rem"}
           zIndex={1}
           bgColor={colorMode === "dark" ? "gray.800" : "white"}>
-          <Heading size={"md"}>Explore Movies</Heading>
+          <Heading size={"md"}>
+            Explore Movies {data && `(${data?.pages?.[0]?.data.total_results})`}
+          </Heading>
           <Button
             size={"sm"}
             variant={"outline"}
@@ -62,19 +70,50 @@ function Movies() {
             Filter
           </Button>
         </Flex>
-        {loadingResults ? (
+        {isLoading ? (
           <Flex w={"full"} justifyContent={"center"} py={10}>
             <CircularProgress isIndeterminate m={10} />
           </Flex>
         ) : (
           <Container maxW={"container.xl"} p={3}>
-            {discover?.data?.results.map((movie) => (
-              <MediaTileWithInfo
-                mediaType="movie"
-                data={movie}
-                key={movie.id}
-              />
-            ))}
+            {data?.pages.map((page) => {
+              return page.data?.results.map((movie) => (
+                <MediaTileWithInfo
+                  mediaType="movie"
+                  data={movie}
+                  key={movie.id}
+                />
+              ));
+            })}
+            {data?.pages?.[0]?.data.total_results === 0 && (
+              <Flex
+                h={" 6rem"}
+                justifyContent={"center"}
+                alignItems={"center"}
+                direction={"column"}>
+                <Heading colorScheme={"red"} textAlign={"center"}>
+                  {" "}
+                  No Results
+                </Heading>
+                <Text>Please choose some other filters</Text>
+              </Flex>
+            )}
+            {!hasNextPage && data?.pages?.[0]?.data.total_results > 0 ? (
+              <Flex h={"6rem"} justifyContent={"center"} alignItems={"center"}>
+                <Heading colorScheme={"red"} textAlign={"center"}>
+                  {" "}
+                  !! No More Results !!
+                </Heading>
+              </Flex>
+            ) : (
+              <Button
+                w={"full"}
+                colorScheme={"red"}
+                isLoading={isFetchingNextPage}
+                onClick={loadMore}>
+                Load More
+              </Button>
+            )}
           </Container>
         )}
       </Container>

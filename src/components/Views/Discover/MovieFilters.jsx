@@ -110,6 +110,7 @@ function MovieFilters({ filters, genreList, onApplyFilters }) {
                             min={0}
                             max={10}
                             step={0.5}
+                            defaultValue={[0, 10]}
                             minStepsBetweenThumbs={0.5}
                             name_1={"vote_average.gte"}
                             name_2={"vote_average.lte"}
@@ -122,6 +123,7 @@ function MovieFilters({ filters, genreList, onApplyFilters }) {
                             min={0}
                             max={400}
                             step={10}
+                            defaultValue={[0, 400]}
                             minStepsBetweenThumbs={10}
                             name_1={"with_runtime.gte"}
                             name_2={"with_runtime.lte"}
