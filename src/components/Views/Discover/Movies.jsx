@@ -1,12 +1,10 @@
 import {
-  Box,
   Button,
   CircularProgress,
   Container,
   Drawer,
   Flex,
   Heading,
-  Progress,
   Text,
   useColorMode,
   useDisclosure,
@@ -14,9 +12,9 @@ import {
 import React, { useEffect, useState } from "react";
 import { MdFilterAlt } from "react-icons/md";
 import { useLocation } from "react-router-dom";
-import { useDiscover, useMovieDiscover } from "../../../hooks/discover.query";
+import { useMovieDiscover } from "../../../hooks/discover.query";
 import { useMovieGenres } from "../../../hooks/genre.query";
-import { setPageTitle } from "../../../utils/utils";
+import { nFormatter, setPageTitle } from "../../../utils/utils";
 import MediaTileWithInfo from "../../shared/MediaTile/MediaTileWithInfo";
 import MovieFilters from "./MovieFilters";
 
@@ -27,7 +25,7 @@ function Movies() {
     ...state,
   });
   const { isOpen, onClose, onOpen } = useDisclosure();
-  const { data: genre, isLoading: loadingGenres } = useMovieGenres();
+  const { data: genre } = useMovieGenres();
 
   const { data, hasNextPage, fetchNextPage, isFetchingNextPage, isLoading } =
     useMovieDiscover(filters);
@@ -60,7 +58,8 @@ function Movies() {
           zIndex={1}
           bgColor={colorMode === "dark" ? "gray.800" : "white"}>
           <Heading size={"md"}>
-            Explore Movies {data && `(${data?.pages?.[0]?.data.total_results})`}
+            Explore Movies{" "}
+            {data && `(${nFormatter(data?.pages?.[0]?.data.total_results)})`}
           </Heading>
           <Button
             size={"sm"}
