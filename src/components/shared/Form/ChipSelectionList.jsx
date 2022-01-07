@@ -39,7 +39,7 @@ function ChipSelectionList({ name, options, label }) {
   return (
     <>
       {label && <FormLabel>{label}</FormLabel>}
-      <Flex gap={"0.5rem"} flexWrap={"wrap"} mb={4}>
+      <Flex gap={"0.5rem"} flexWrap={"wrap"}>
         {options.map((option) => (
           <SelectionChip
             key={option.id}

@@ -23,7 +23,7 @@ function RangeSlider({ name_1, name_2, label, ...sliderProps }) {
   };
 
   return (
-    <Box width={"92%"} mb={6}>
+    <Box width={"92%"} mb={3}>
       {label && <FormLabel mb={1}>{label}</FormLabel>}
       <ChakraRange
         {...sliderProps}

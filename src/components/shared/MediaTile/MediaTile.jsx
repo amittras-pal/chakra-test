@@ -28,7 +28,6 @@ function MediaTile({ mediaType, data }) {
       minW={"11rem"}
       as={Link}
       to={`/${mediaType}/${data.id}`}
-      style={{ outline: "none" }}
       h={"auto"}
       boxShadow={"lg"}
       rounded={"md"}
@@ -36,7 +35,7 @@ function MediaTile({ mediaType, data }) {
       outline={"none"}
       padding={4}
       overflow={"hidden"}
-      style={{ transition: "all 0.25s ease-in-out" }}
+      style={{ transition: "all 0.25s ease-in-out", outline: "none" }}
       _focusWithin={{
         borderColor: "blue.300",
         transform: "translateY(-10px)",
