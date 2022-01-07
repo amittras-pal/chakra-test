@@ -3,6 +3,7 @@
     border-color: var(--chakra-colors-gray-200) !important;
     border-radius: var(--chakra-radii-md) !important;
   }
+
   &__option {
     &--is-focused {
       background-color: var(--chakra-colors-gray-200) !important;
@@ -19,6 +20,12 @@
     border-color: var(--chakra-colors-whiteAlpha-300) !important;
     border-radius: var(--chakra-radii-md) !important;
     background-color: var(--chakra-colors-gray-700) !important;
+  }
+  &__placeholder {
+    color: var(--chakra-colors-gray-400) !important;
+  }
+  &__input {
+    color: var(--chakra-colors-white) !important;
   }
   &__single-value {
     color: var(--chakra-colors-white) !important;

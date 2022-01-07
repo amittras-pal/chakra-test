@@ -12,6 +12,7 @@ import {
   DrawerFooter,
   DrawerHeader,
   DrawerOverlay,
+  FormLabel,
   Heading,
   Text,
   VStack,
@@ -20,6 +21,7 @@ import { FormikProvider, useFormik } from "formik";
 import React from "react";
 import { MdCheck, MdExpandLess, MdExpandMore } from "react-icons/md";
 import { MOVIE_SORT_MODES } from "../../../constants/appConstants";
+import { LANGUAGE_CODES } from "../../../constants/languageCodes";
 import ChipSelectionList from "../../shared/Form/ChipSelectionList";
 import DatePicker from "../../shared/Form/DatePicker/DatePicker";
 import RangeSlider from "../../shared/Form/RangeSlider";
@@ -69,6 +71,7 @@ function MovieFilters({ filters, genreList, onApplyFilters }) {
                             name={"sort_by"}
                             options={MOVIE_SORT_MODES}
                             isSearchable={false}
+                            maxMenuHeight={400}
                           />
                         </Box>
                       </AccordionPanel>
@@ -102,7 +105,6 @@ function MovieFilters({ filters, genreList, onApplyFilters }) {
                             label="Genres"
                           />
                         </Box>
-
                         <Divider />
                         <Box p={3}>
                           <RangeSlider
@@ -127,6 +129,17 @@ function MovieFilters({ filters, genreList, onApplyFilters }) {
                             minStepsBetweenThumbs={1}
                             name_1={"with_runtime.gte"}
                             name_2={"with_runtime.lte"}
+                          />
+                        </Box>
+                        <Divider />
+                        <Box p={3}>
+                          <FormLabel>Movie Language</FormLabel>
+                          <Select
+                            name={"with_original_language"}
+                            options={LANGUAGE_CODES}
+                            placeholder={"Search Languages..."}
+                            menuPlacement={"top"}
+                            maxMenuHeight={250}
                           />
                         </Box>
                         <Divider />

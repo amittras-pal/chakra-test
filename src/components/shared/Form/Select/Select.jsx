@@ -28,7 +28,6 @@ function Select(props) {
       classNamePrefix={`${colorMode}-select`}
       closeMenuOnScroll={true}
       components={{ DropdownIndicator }}
-      maxMenuHeight={400}
       value={options.find((opt) => opt.value === value[name])}
       onChange={handleChange}
       {...rest}
@@ -39,5 +38,5 @@ function Select(props) {
 export default Select;
 
 // setTimeout(() => {
-//     debugger;
-// }, 500)
+//   debugger;
+// }, 1500);
