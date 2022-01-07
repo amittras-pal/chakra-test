@@ -19,7 +19,11 @@ function SSDatePicker(props) {
 
   return (
     <Box mb={3} w={"100%"}>
-      {label && <FormLabel htmlFor={name}>{label}</FormLabel>}
+      {label && (
+        <FormLabel fontSize={"sm"} htmlFor={name}>
+          {label}
+        </FormLabel>
+      )}
       <DatePicker
         name={name}
         value={value[name] ? new Date(value[name]) : null}

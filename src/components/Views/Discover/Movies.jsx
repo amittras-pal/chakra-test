@@ -51,7 +51,7 @@ function Movies() {
           p={3}
           pos={"sticky"}
           top={"4rem"}
-          zIndex={98}
+          zIndex={1}
           bgColor={colorMode === "dark" ? "gray.800" : "white"}>
           <Heading size={"md"}>Explore Movies</Heading>
           <Button

@@ -63,7 +63,8 @@ function AppHeader() {
         px={4}
         position={"sticky"}
         top={0}
-        zIndex={100}>
+        boxShadow={"md"}
+        zIndex={2}>
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
           <HStack alignItems={"center"} spacing={4}>
             <IconButton
@@ -99,11 +100,13 @@ function AppHeader() {
                   </MenuButton>
                   <MenuList maxW={"fit-content"}>
                     {menu.sectionItems.map((menuItem) => {
-                      const { label, path, passState, Icon } = menuItem;
+                      const { label, path, filterParams, Icon } = menuItem;
                       return (
                         <MenuItem
                           key={label}
-                          onClick={() => navigateToDiscover(path, passState)}>
+                          onClick={() =>
+                            navigateToDiscover(path, filterParams)
+                          }>
                           <Icon
                             size={"1.25em"}
                             style={{ marginRight: "1rem" }}
@@ -159,14 +162,15 @@ function AppHeader() {
                       <AccordionPanel p={0}>
                         <List>
                           {menu.sectionItems.map((menuItem) => {
-                            const { label, path, passState, Icon } = menuItem;
+                            const { label, path, filterParams, Icon } =
+                              menuItem;
                             return (
                               <ListItem
                                 as={Flex}
                                 p={3}
                                 key={label}
                                 onClick={() =>
-                                  navigateToDiscover(path, passState)
+                                  navigateToDiscover(path, filterParams)
                                 }>
                                 <ListIcon
                                   as={() =>
