@@ -19,7 +19,7 @@
 }
 
 .datepicker-calendar {
-  padding: 0.25rem;
+  padding: 0.5rem;
   border-radius: 0.5rem;
   box-shadow: var(--chakra-shadows-xl);
   .react-calendar__month-view__weekdays__weekday {
@@ -29,13 +29,13 @@
   .react-calendar__navigation button {
     transition: all 0.15s ease-in-out;
     min-width: 2.25rem;
-    border-radius: 0.5rem;
+    border-radius: 0.25rem;
   }
   &.dark {
     background-color: var(--chakra-colors-gray-800);
     border: 1px solid var(--chakra-colors-whiteAlpha-300);
 
-    .react-calendar__tile,
+    .react-calendar__tile:not(.react-calendar__tile--active),
     .react-calendar__navigation button {
       &:hover,
       &:focus {
@@ -50,9 +50,6 @@
     .react-calendar__tile--active {
       background-color: var(--chakra-colors-red-200);
       color: var(--chakra-colors-gray-800);
-      &:hover {
-        color: var(--chakra-colors-white);
-      }
     }
     .react-calendar__tile--now:not(.react-calendar__tile--active) {
       background-color: var(--chakra-colors-gray-800);

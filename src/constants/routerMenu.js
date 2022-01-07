@@ -5,6 +5,11 @@ import {
   MdOnlinePrediction,
 } from "react-icons/md";
 
+const defaultFilters = {
+  "vote_average.gte": 0,
+  "vote_average.lte": 10,
+};
+
 const exploreRouterMenu = [
   {
     sectionId: "Movies",
@@ -14,9 +19,8 @@ const exploreRouterMenu = [
         path: "movie",
         label: "Popular",
         passState: {
+          ...defaultFilters,
           sort_by: "popularity.desc",
-          "vote_average.gte": 0,
-          "vote_average.lte": 10,
           "primary_release_date.lte": DateTime.now().toISODate(),
         },
         Icon: MdLocalFireDepartment,
@@ -25,9 +29,8 @@ const exploreRouterMenu = [
         path: "movie",
         label: "Latest",
         passState: {
+          ...defaultFilters,
           sort_by: "release_date.desc",
-          "vote_average.gte": 0,
-          "vote_average.lte": 10,
           "primary_release_date.lte": DateTime.now().toISODate(),
         },
         Icon: MdOfflineBolt,
@@ -36,9 +39,8 @@ const exploreRouterMenu = [
         path: "movie",
         label: "Upcoming",
         passState: {
+          ...defaultFilters,
           sort_by: "release_date.asc",
-          "vote_average.gte": 0,
-          "vote_average.lte": 10,
           "primary_release_date.gte": DateTime.now().toISODate(),
           "primary_release_date.lte": DateTime.now()
             .plus({ months: 1 })
