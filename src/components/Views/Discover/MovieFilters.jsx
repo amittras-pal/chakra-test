@@ -23,7 +23,7 @@ import { MOVIE_SORT_MODES } from "../../../constants/appConstants";
 import ChipSelectionList from "../../shared/Form/ChipSelectionList";
 import DatePicker from "../../shared/Form/DatePicker/DatePicker";
 import RangeSlider from "../../shared/Form/RangeSlider";
-import SelectDropdown from "../../shared/Form/SelectDropdown";
+import Select from "../../shared/Form/Select/Select";
 import Switch from "../../shared/Form/Switch";
 
 function MovieFilters({ filters, genreList, onApplyFilters }) {
@@ -65,12 +65,10 @@ function MovieFilters({ filters, genreList, onApplyFilters }) {
                       <AccordionPanel p={0}>
                         <Divider />
                         <Box p={3}>
-                          <SelectDropdown
-                            variant={"outline"}
-                            size={"sm"}
-                            borderRadius={"md"}
+                          <Select
                             name={"sort_by"}
                             options={MOVIE_SORT_MODES}
+                            isSearchable={false}
                           />
                         </Box>
                       </AccordionPanel>
@@ -95,11 +93,38 @@ function MovieFilters({ filters, genreList, onApplyFilters }) {
                         <Box p={3}>
                           <ChipSelectionList
                             name="with_genres"
-                            options={genreList.map((g) => ({
-                              ...g,
-                              id: String(g.id),
-                            }))}
+                            options={
+                              genreList?.map((g) => ({
+                                ...g,
+                                id: String(g.id),
+                              })) || []
+                            }
                             label="Genres"
+                          />
+                        </Box>
+
+                        <Divider />
+                        <Box p={3}>
+                          <RangeSlider
+                            label={"Average User Vote"}
+                            min={0}
+                            max={10}
+                            step={0.5}
+                            minStepsBetweenThumbs={0.5}
+                            name_1={"vote_average.gte"}
+                            name_2={"vote_average.lte"}
+                          />
+                        </Box>
+                        <Divider />
+                        <Box p={3}>
+                          <RangeSlider
+                            label={"Runtime (minutes)"}
+                            min={0}
+                            max={400}
+                            step={10}
+                            minStepsBetweenThumbs={10}
+                            name_1={"with_runtime.gte"}
+                            name_2={"with_runtime.lte"}
                           />
                         </Box>
                         <Divider />
@@ -126,18 +151,6 @@ function MovieFilters({ filters, genreList, onApplyFilters }) {
                               }
                             />
                           </VStack>
-                        </Box>
-                        <Divider />
-                        <Box p={3}>
-                          <RangeSlider
-                            label={"Average User Vote"}
-                            min={0}
-                            max={10}
-                            step={0.5}
-                            minStepsBetweenThumbs={0.5}
-                            name_1={"vote_average.gte"}
-                            name_2={"vote_average.lte"}
-                          />
                         </Box>
                         <Divider />
                         <Box p={3}>
