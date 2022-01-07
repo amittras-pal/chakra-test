@@ -3,7 +3,9 @@ import {
   AccordionButton,
   AccordionItem,
   AccordionPanel,
+  Box,
   Button,
+  Divider,
   DrawerBody,
   DrawerCloseButton,
   DrawerContent,
@@ -12,12 +14,14 @@ import {
   DrawerOverlay,
   Heading,
   Text,
+  VStack,
 } from "@chakra-ui/react";
 import { FormikProvider, useFormik } from "formik";
 import React from "react";
 import { MdCheck, MdExpandLess, MdExpandMore } from "react-icons/md";
 import { MOVIE_SORT_MODES } from "../../../constants/appConstants";
 import ChipSelectionList from "../../shared/Form/ChipSelectionList";
+import DatePicker from "../../shared/Form/DatePicker/DatePicker";
 import RangeSlider from "../../shared/Form/RangeSlider";
 import SelectDropdown from "../../shared/Form/SelectDropdown";
 import Switch from "../../shared/Form/Switch";
@@ -58,14 +62,17 @@ function MovieFilters({ filters, genreList, onApplyFilters }) {
                         </Text>
                         {isExpanded ? <MdExpandLess /> : <MdExpandMore />}
                       </AccordionButton>
-                      <AccordionPanel p={3}>
-                        <SelectDropdown
-                          variant={"outline"}
-                          size={"sm"}
-                          borderRadius={"md"}
-                          name={"sort_by"}
-                          options={MOVIE_SORT_MODES}
-                        />
+                      <AccordionPanel p={0}>
+                        <Divider />
+                        <Box p={3}>
+                          <SelectDropdown
+                            variant={"outline"}
+                            size={"sm"}
+                            borderRadius={"md"}
+                            name={"sort_by"}
+                            options={MOVIE_SORT_MODES}
+                          />
+                        </Box>
                       </AccordionPanel>
                     </>
                   )}
@@ -83,30 +90,64 @@ function MovieFilters({ filters, genreList, onApplyFilters }) {
                         </Text>
                         {isExpanded ? <MdExpandLess /> : <MdExpandMore />}
                       </AccordionButton>
-                      <AccordionPanel p={3}>
-                        <ChipSelectionList
-                          name="with_genres"
-                          options={genreList.map((g) => ({
-                            ...g,
-                            id: String(g.id),
-                          }))}
-                          label="Genres"
-                        />
-                        <RangeSlider
-                          label={"Average User Vote"}
-                          min={0}
-                          max={10}
-                          step={0.5}
-                          minStepsBetweenThumbs={0.5}
-                          name_1={"vote_average.gte"}
-                          name_2={"vote_average.lte"}
-                        />
-                        <Switch
-                          name="include_adult"
-                          label="Include Adult?"
-                          colorScheme="red"
-                          mr={2}
-                        />
+                      <AccordionPanel p={0}>
+                        <Divider />
+                        <Box p={3}>
+                          <ChipSelectionList
+                            name="with_genres"
+                            options={genreList.map((g) => ({
+                              ...g,
+                              id: String(g.id),
+                            }))}
+                            label="Genres"
+                          />
+                        </Box>
+                        <Divider />
+                        <Box p={3}>
+                          <VStack spacing={3} textAlign={"left"} mb={3}>
+                            <Text
+                              textAlign={"left"}
+                              w={"100%"}
+                              fontWeight={"bold"}>
+                              Release Dates
+                            </Text>
+                            <DatePicker
+                              name={"primary_release_date.gte"}
+                              label={"From"}
+                              maxDate={
+                                filterForm.values["primary_release_date.lte"]
+                              }
+                            />
+                            <DatePicker
+                              name={"primary_release_date.lte"}
+                              label={"To"}
+                              minDate={
+                                filterForm.values["primary_release_date.gte"]
+                              }
+                            />
+                          </VStack>
+                        </Box>
+                        <Divider />
+                        <Box p={3}>
+                          <RangeSlider
+                            label={"Average User Vote"}
+                            min={0}
+                            max={10}
+                            step={0.5}
+                            minStepsBetweenThumbs={0.5}
+                            name_1={"vote_average.gte"}
+                            name_2={"vote_average.lte"}
+                          />
+                        </Box>
+                        <Divider />
+                        <Box p={3}>
+                          <Switch
+                            name="include_adult"
+                            label="Include Adult?"
+                            colorScheme="red"
+                            mr={2}
+                          />
+                        </Box>
                       </AccordionPanel>
                     </>
                   )}
@@ -114,7 +155,6 @@ function MovieFilters({ filters, genreList, onApplyFilters }) {
               </Accordion>
             </form>
           </FormikProvider>
-          {/* {JSON.stringify(filterForm.values)} */}
         </DrawerBody>
         <DrawerFooter borderTopWidth={"1px"} display={"flex"}>
           <Button
