@@ -97,14 +97,15 @@ function Movies() {
                 <Text>Please choose some other filters</Text>
               </Flex>
             )}
-            {!hasNextPage && data?.pages?.[0]?.data.total_results > 0 ? (
+            {!hasNextPage && data?.pages?.[0]?.data.total_results > 0 && (
               <Flex h={"6rem"} justifyContent={"center"} alignItems={"center"}>
                 <Heading colorScheme={"red"} textAlign={"center"}>
                   {" "}
                   !! No More Results !!
                 </Heading>
               </Flex>
-            ) : (
+            )}
+            {hasNextPage && (
               <Button
                 w={"full"}
                 colorScheme={"red"}

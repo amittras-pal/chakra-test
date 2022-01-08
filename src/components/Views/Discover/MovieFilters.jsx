@@ -140,6 +140,7 @@ function MovieFilters({ filters, genreList, onApplyFilters }) {
                             placeholder={"Search Languages..."}
                             menuPlacement={"top"}
                             maxMenuHeight={250}
+                            isClearable={true}
                           />
                         </Box>
                         <Divider />
