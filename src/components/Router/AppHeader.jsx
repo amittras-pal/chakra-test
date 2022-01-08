@@ -33,8 +33,6 @@ import {
   MdDarkMode,
   MdExpandLess,
   MdExpandMore,
-  MdHome,
-  MdInfo,
   MdLightMode,
   MdMenu,
 } from "react-icons/md";
@@ -46,13 +44,8 @@ function AppHeader() {
   const { colorMode, toggleColorMode } = useColorMode();
   const navigate = useNavigate();
 
-  const navigateToDiscover = (type, filter) => {
-    navigate(`/discover/${type}`, { state: filter });
-    if (isOpen) onClose();
-  };
-
-  const navigateToHome = () => {
-    navigate("/");
+  const navigateToDiscover = (type, state) => {
+    navigate(`/discover/${type}`, { state });
     if (isOpen) onClose();
   };
 
@@ -135,17 +128,13 @@ function AppHeader() {
             borderBottomWidth={"1px"}
             display={"flex"}
             alignItems={"center"}>
-            <Heading size={"sm"}>ShowSurfer.</Heading>
+            <Heading size={"sm"} as={Link} to={"/"} onClick={onClose}>
+              ShowSurfer.
+            </Heading>
             <DrawerCloseButton />
           </DrawerHeader>
           <DrawerBody p={0}>
-            <List>
-              <ListItem p={3} onClick={navigateToHome}>
-                <ListIcon as={MdHome} />
-                Home
-              </ListItem>
-            </List>
-            <Accordion allowToggle>
+            <Accordion allowMultiple>
               {exploreRouterMenu.map((menu) => (
                 <AccordionItem key={menu.sectionId}>
                   {({ isExpanded }) => (
@@ -166,7 +155,12 @@ function AppHeader() {
                               menuItem;
                             return (
                               <ListItem
-                                as={Flex}
+                                as={Button}
+                                variant={"ghost"}
+                                w={"full"}
+                                borderRadius={"0"}
+                                display={"flex"}
+                                justifyContent={"start"}
                                 p={3}
                                 key={label}
                                 onClick={() =>
@@ -191,12 +185,6 @@ function AppHeader() {
                 </AccordionItem>
               ))}
             </Accordion>
-            <List>
-              <ListItem p={3}>
-                <ListIcon as={MdInfo} />
-                About
-              </ListItem>
-            </List>
           </DrawerBody>
           <DrawerFooter
             display={"flex"}
