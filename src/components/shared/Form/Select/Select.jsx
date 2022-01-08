@@ -3,7 +3,7 @@ import { useFormikContext } from "formik";
 import ReactSelect, { components } from "react-select";
 import React from "react";
 import "./Select.scss";
-import { MdExpandMore } from "react-icons/md";
+import { MdClose, MdExpandMore } from "react-icons/md";
 
 function Select(props) {
   const { colorMode } = useColorMode();
@@ -12,7 +12,8 @@ function Select(props) {
   const { setFieldValue, getFieldProps } = useFormikContext();
   const { value } = getFieldProps();
   const handleChange = (selection) => {
-    setFieldValue([name], selection.value);
+    console.log(selection);
+    setFieldValue([name], selection?.value || null);
   };
 
   const DropdownIndicator = (props) => (
@@ -21,13 +22,19 @@ function Select(props) {
     </components.DropdownIndicator>
   );
 
+  const ClearIndicator = (props) => (
+    <components.ClearIndicator {...props}>
+      <MdClose />
+    </components.ClearIndicator>
+  );
+
   return (
     <ReactSelect
       options={options}
       className={`${colorMode}-select`}
       classNamePrefix={`${colorMode}-select`}
       closeMenuOnScroll={true}
-      components={{ DropdownIndicator }}
+      components={{ DropdownIndicator, ClearIndicator }}
       value={options.find((opt) => opt.value === value[name])}
       onChange={handleChange}
       {...rest}
@@ -36,7 +43,3 @@ function Select(props) {
 }
 
 export default Select;
-
-// setTimeout(() => {
-//   debugger;
-// }, 1500);
