@@ -30,6 +30,7 @@ import ChipSelectionList from "../../../shared/Form/ChipSelectionList";
 import DatePicker from "../../../shared/Form/DatePicker/DatePicker";
 import RangeSlider from "../../../shared/Form/RangeSlider";
 import Select from "../../../shared/Form/Select/Select";
+import Slider from "../../../shared/Form/Slider";
 import Switch from "../../../shared/Form/Switch";
 
 function ShowsFilter({ filters, genreList, onApplyFilters }) {
@@ -151,6 +152,17 @@ function ShowsFilter({ filters, genreList, onApplyFilters }) {
                           />
                         </Box>
                         <Divider />
+                        <Box p={3}>
+                          <Slider
+                            name={"vote_average.gte"}
+                            label={"Average Vote (greater than)"}
+                            min={0}
+                            max={10}
+                            step={1}
+                            defaultValue={0}
+                            minStepsBetweenThumbs={1}
+                          />
+                        </Box>
                         <Divider />
                         <Box p={3}>
                           <FormLabel>Language</FormLabel>
@@ -163,6 +175,7 @@ function ShowsFilter({ filters, genreList, onApplyFilters }) {
                             isClearable={true}
                           />
                         </Box>
+                        <Divider />
                         <Box p={3}>
                           <Text
                             textAlign={"left"}

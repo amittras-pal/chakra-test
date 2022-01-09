@@ -18,7 +18,7 @@ function SSDatePicker(props) {
   };
 
   return (
-    <Box mb={3} w={"100%"}>
+    <Box w={"100%"}>
       {label && (
         <FormLabel fontSize={"sm"} htmlFor={name}>
           {label}
