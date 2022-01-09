@@ -20,13 +20,13 @@ import {
 import { FormikProvider, useFormik } from "formik";
 import React from "react";
 import { MdCheck, MdExpandLess, MdExpandMore } from "react-icons/md";
-import { MOVIE_SORT_MODES } from "../../../constants/appConstants";
-import { LANGUAGE_CODES } from "../../../constants/languageCodes";
-import ChipSelectionList from "../../shared/Form/ChipSelectionList";
-import DatePicker from "../../shared/Form/DatePicker/DatePicker";
-import RangeSlider from "../../shared/Form/RangeSlider";
-import Select from "../../shared/Form/Select/Select";
-import Switch from "../../shared/Form/Switch";
+import { MOVIE_SORT_MODES } from "../../../../constants/appConstants";
+import { LANGUAGE_CODES } from "../../../../constants/languageCodes";
+import ChipSelectionList from "../../../shared/Form/ChipSelectionList";
+import DatePicker from "../../../shared/Form/DatePicker/DatePicker";
+import RangeSlider from "../../../shared/Form/RangeSlider";
+import Select from "../../../shared/Form/Select/Select";
+import Switch from "../../../shared/Form/Switch";
 
 function MovieFilters({ filters, genreList, onApplyFilters }) {
   const filterForm = useFormik({
