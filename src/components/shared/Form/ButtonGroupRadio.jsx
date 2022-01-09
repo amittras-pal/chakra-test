@@ -7,6 +7,7 @@ import {
   useRadioGroup,
 } from "@chakra-ui/react";
 import React from "react";
+import { useFormikContext } from "formik";
 
 const RadioCard = (props) => {
   const { colorMode } = useColorMode();
@@ -29,12 +30,16 @@ const RadioCard = (props) => {
   );
 };
 
-function ButtonGroupRadio({ name, options, form }) {
+function ButtonGroupRadio({ name, options }) {
+  const { setFieldValue, getFieldProps } = useFormikContext();
+  const { value } = getFieldProps();
+
   const { getRootProps, getRadioProps } = useRadioGroup({
     name,
-    value: form.values[name],
-    onChange: (val) => form.setFieldValue([name], val),
+    value: value[name],
+    onChange: (val) => setFieldValue([name], val),
   });
+
   return (
     <ButtonGroup isAttached {...getRootProps()} w={"full"}>
       {options.map((option) => (

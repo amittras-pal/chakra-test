@@ -3,13 +3,20 @@ import {
   MdLocalFireDepartment,
   MdOfflineBolt,
   MdOnlinePrediction,
+  MdStackedLineChart,
 } from "react-icons/md";
 
-const defaultFilters = {
+const defaultMovieFilters = {
   "vote_average.gte": 0,
   "vote_average.lte": 10,
   "with_runtime.gte": 0,
   "with_runtime.lte": 400,
+};
+
+const defaultTvFilters = {
+  "with_runtime.gte": 0,
+  "with_runtime.lte": 400,
+  "vote_average.gte": 0,
 };
 
 const exploreRouterMenu = [
@@ -21,7 +28,7 @@ const exploreRouterMenu = [
         path: "movie",
         label: "Popular",
         filterParams: {
-          ...defaultFilters,
+          ...defaultMovieFilters,
           sort_by: "popularity.desc",
           "primary_release_date.lte": DateTime.now().toISODate(),
         },
@@ -31,7 +38,7 @@ const exploreRouterMenu = [
         path: "movie",
         label: "Latest",
         filterParams: {
-          ...defaultFilters,
+          ...defaultMovieFilters,
           sort_by: "release_date.desc",
           "primary_release_date.lte": DateTime.now().toISODate(),
         },
@@ -41,7 +48,7 @@ const exploreRouterMenu = [
         path: "movie",
         label: "Upcoming",
         filterParams: {
-          ...defaultFilters,
+          ...defaultMovieFilters,
           sort_by: "release_date.asc",
           "primary_release_date.gte": DateTime.now().toISODate(),
           "primary_release_date.lte": DateTime.now()
@@ -49,6 +56,40 @@ const exploreRouterMenu = [
             .toISODate(),
         },
         Icon: MdOnlinePrediction,
+      },
+    ],
+  },
+  {
+    sectionId: "Shows",
+    sectionLabel: "Explore TV Shows",
+    sectionItems: [
+      {
+        path: "tv",
+        label: "Popular",
+        filterParams: {
+          ...defaultTvFilters,
+          sort_by: "popularity.desc",
+        },
+        Icon: MdLocalFireDepartment,
+      },
+      // {
+      //   path: "tv",
+      //   label: "Latest",
+      //   filterParams: {
+      //     ...defaultTvFilters,
+      //     sort_by: "first_air_date.desc",
+      //     "air_date.lte": DateTime.now().toISODate(),
+      //   },
+      //   Icon: MdOfflineBolt,
+      // },
+      {
+        path: "tv",
+        label: "Top Rated",
+        filterParams: {
+          ...defaultTvFilters,
+          sort_by: "vote_average.desc",
+        },
+        Icon: MdStackedLineChart,
       },
     ],
   },
