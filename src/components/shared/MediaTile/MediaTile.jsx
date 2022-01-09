@@ -12,6 +12,7 @@ import { useApiConfig } from "../../../hooks/configuration.query";
 import { DateTime } from "luxon";
 import { Link } from "react-router-dom";
 import { getFormattedDate } from "../../../utils/utils";
+import RatingCircle from "../RatingCircle/RatingCircle";
 
 function MediaTile({ mediaType, data }) {
   const { data: config } = useApiConfig();
@@ -38,12 +39,10 @@ function MediaTile({ mediaType, data }) {
       style={{ transition: "all 0.25s ease-in-out", outline: "none" }}
       _focusWithin={{
         borderColor: "blue.300",
-        transform: "translateY(-10px)",
         color: colorMode === "dark" ? "red.200" : "red.500",
       }}
       _hover={{
         borderColor: "blue.300",
-        transform: "translateY(-10px)",
         color: colorMode === "dark" ? "red.200" : "red.500",
       }}>
       <Box mt={-4} mx={-4} pos={"relative"} minH={"14rem"}>
@@ -51,25 +50,18 @@ function MediaTile({ mediaType, data }) {
           src={`${config?.data?.images.secure_base_url}w342${data?.poster_path}`}
           layout={"fill"}
         />
-        <Circle
-          bgColor={colorMode === "dark" ? "red.200" : "red.500"}
-          borderColor={colorMode === "dark" ? "gray.800" : "white"}
-          padding={2}
-          borderRadius={"full"}
-          borderWidth={"4px"}
+        <Box
           position={"absolute"}
           bottom={"0"}
           right={"10px"}
-          transform={"translateY(50%)"}
-          w={"2.3rem"}
-          h={"2.3rem"}
-          fontSize={"14px"}>
-          <Text
-            color={colorMode === "dark" ? "gray.800" : "gray.100"}
-            fontWeight={"bold"}>
-            {data?.vote_average ? data?.vote_average : "NR"}
-          </Text>
-        </Circle>
+          transform={"translateY(45%)"}
+          bgColor={colorMode === "dark" ? "gray.800" : "white"}
+          borderRadius={"full"}>
+          <RatingCircle
+            size={"2.5rem"}
+            rating={data?.vote_average ? data?.vote_average : "NR"}
+          />
+        </Box>
       </Box>
       <Stack mt={4}>
         <Heading size={"xs"}>{titleString}</Heading>

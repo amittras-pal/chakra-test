@@ -14,6 +14,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { DateTime } from "luxon";
 import { getFormattedDate } from "../../../utils/utils";
+import RatingCircle from "../RatingCircle/RatingCircle";
 
 function MediaTileWithInfo({ mediaType, data, showMediaType }) {
   const { data: config } = useApiConfig();
@@ -82,25 +83,18 @@ function MediaTileWithInfo({ mediaType, data, showMediaType }) {
             </Text>
           </Flex>
         )}
-        <Circle
-          bgColor={colorMode === "dark" ? "red.200" : "red.500"}
-          borderColor={colorMode === "dark" ? "gray.800" : "white"}
-          padding={2}
-          borderRadius={"full"}
-          borderWidth={"4px"}
+        <Box
           position={"absolute"}
           right={"0"}
           top={"10px"}
           transform={"translateX(50%)"}
-          w={"2.3rem"}
-          h={"2.3rem"}
-          fontSize={"14px"}>
-          <Text
-            color={colorMode === "dark" ? "gray.800" : "gray.100"}
-            fontWeight={"bold"}>
-            {data?.vote_average ? data?.vote_average : "NR"}
-          </Text>
-        </Circle>
+          bgColor={colorMode === "dark" ? "gray.800" : "white"}
+          borderRadius={"full"}>
+          <RatingCircle
+            size={"2.3rem"}
+            rating={data?.vote_average ? data?.vote_average : "NR"}
+          />
+        </Box>
       </Box>
       <Flex
         padding={3}
