@@ -1,18 +1,17 @@
 import {
   Box,
-  Circle,
   Flex,
   Heading,
   Image,
   Text,
   useColorMode,
 } from "@chakra-ui/react";
+import { DateTime } from "luxon";
+import React from "react";
+import { MdLiveTv, MdVideocam } from "react-icons/md";
+import { Link } from "react-router-dom";
 import { useApiConfig } from "../../../hooks/configuration.query";
 import { ReactComponent as ImageThumb } from "../../../resources/image-thumb.svg";
-import { MdVideocam, MdLiveTv } from "react-icons/md";
-import React from "react";
-import { Link } from "react-router-dom";
-import { DateTime } from "luxon";
 import { getFormattedDate } from "../../../utils/utils";
 import RatingCircle from "../RatingCircle/RatingCircle";
 

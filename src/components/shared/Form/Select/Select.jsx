@@ -12,7 +12,6 @@ function Select(props) {
   const { setFieldValue, getFieldProps } = useFormikContext();
   const { value } = getFieldProps();
   const handleChange = (selection) => {
-    console.log(selection);
     setFieldValue([name], selection?.value || null);
   };
 

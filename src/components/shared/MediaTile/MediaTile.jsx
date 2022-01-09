@@ -1,16 +1,15 @@
 import {
   Box,
-  Circle,
   Heading,
   Image,
   Stack,
   Text,
   useColorMode,
 } from "@chakra-ui/react";
-import React from "react";
-import { useApiConfig } from "../../../hooks/configuration.query";
 import { DateTime } from "luxon";
+import React from "react";
 import { Link } from "react-router-dom";
+import { useApiConfig } from "../../../hooks/configuration.query";
 import { getFormattedDate } from "../../../utils/utils";
 import RatingCircle from "../RatingCircle/RatingCircle";
 
