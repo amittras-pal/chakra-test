@@ -6,12 +6,13 @@ import {
 import React from "react";
 
 function RatingCircle({ rating, ...progressProps }) {
-  const convertedValue = typeof rating === "number" ? rating.toFixed(1) : 0;
+  const convertedValue = typeof rating === "number" ? rating.toFixed(1) : 10;
   const label = typeof rating === "number" ? rating.toFixed(1) : rating;
 
   const { colorMode } = useColorMode();
 
   const getProgressColorScheme = () => {
+    if (label === "NR") return colorMode === "dark" ? "blue.300" : "blue.500";
     if (convertedValue < 4) return colorMode === "dark" ? "red.400" : "red.500";
     else if (convertedValue >= 4 && convertedValue < 7) return "orange";
     else return colorMode === "dark" ? "green.300" : "green.500";

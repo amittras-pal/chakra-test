@@ -8,6 +8,7 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import RatingCircle from "../../../shared/RatingCircle/RatingCircle";
+import { ReactComponent as ImageThumb } from "../../../../resources/image-thumb.svg";
 
 function Header({ config, data }) {
   const { colorMode } = useColorMode();
@@ -31,18 +32,24 @@ function Header({ config, data }) {
       bgPosition={"top"}
       bgRepeat={"no-repeat"}>
       <Box
-        maxH={{ base: "16rem", md: "22rem" }}
+        maxH={{ base: "16rem", md: "20rem" }}
         maxW={{ base: "10rem", md: "14rem" }}
+        minH={{ base: "16rem", md: "20rem" }}
+        minW={{ base: "10rem", md: "14rem" }}
         position={"relative"}
-        // overflow={"hidden"}
+        display={"flex"}
+        alignItems={"center"}
+        bgColor={colorMode === "light" ? "gray.200" : "gray.700"}
         boxShadow={"lg"}
         borderRadius={"xl"}
         mt={4}>
-        {data?.poster_path && (
+        {data?.poster_path ? (
           <Image
             borderRadius={"xl"}
             src={`${config?.data?.images.secure_base_url}w342${data.poster_path}`}
           />
+        ) : (
+          <ImageThumb />
         )}
         <Box
           borderRadius={"full"}
@@ -60,7 +67,7 @@ function Header({ config, data }) {
       <Heading textAlign={"center"} fontWeight={"bold"} size={"lg"} mt={4}>
         {data?.title ? data.title : "Movie Title"}
       </Heading>
-      <Text fontStyle={"italic"} my={1}>
+      <Text fontStyle={"italic"} my={1} textAlign={"center"}>
         {data?.tagline}
       </Text>
     </Container>
