@@ -59,7 +59,7 @@ function Movies() {
           bgColor={colorMode === "dark" ? "gray.800" : "white"}>
           <Heading size={"md"}>
             Explore Movies{" "}
-            {data && `(${nFormatter(data?.pages?.[0]?.data.total_results)})`}
+            {data && `(${nFormatter(data?.pages?.[0]?.data.total_results, 1)})`}
           </Heading>
           <Button
             size={"sm"}
