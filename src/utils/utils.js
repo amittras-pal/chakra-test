@@ -1,5 +1,6 @@
 import { DateTime } from "luxon";
 import { APP_TITLE } from "../constants/appConstants";
+import { LANGUAGE_CODES } from "../constants/languageCodes";
 
 export function setPageTitle(title) {
   const newTitle = title ? `${APP_TITLE} | ${title}` : APP_TITLE;
@@ -42,4 +43,9 @@ export function nFormatter(num, digits) {
   return item
     ? (num / item.value).toFixed(digits).replace(rx, "$1") + item.symbol
     : "0";
+}
+
+export function getLanguageName(langCode) {
+  const languageName = LANGUAGE_CODES.find((lang) => lang.value === langCode);
+  return languageName ? languageName.label : "N.A.";
 }
