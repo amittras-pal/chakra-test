@@ -1,4 +1,4 @@
-import { Box, Flex, HStack, Tag, Text } from "@chakra-ui/react";
+import { Box, Flex, Tag, Text } from "@chakra-ui/react";
 import { DateTime } from "luxon";
 import React from "react";
 import { getLanguageName } from "../../../../utils/utils";
@@ -37,7 +37,7 @@ function Overview({ data }) {
         <Text as="span" fontWeight={"bold"} color={"gray.400"} mr={2}>
           Genre(s):{" "}
         </Text>
-        <HStack spacing={2}>
+        <Flex gap={2} flexWrap={"wrap"}>
           {data?.genres?.map((genre) => (
             <Tag
               key={genre.id}
@@ -47,7 +47,7 @@ function Overview({ data }) {
               {genre.name}
             </Tag>
           ))}
-        </HStack>
+        </Flex>
       </Flex>
       <Text mb={2}>
         <Text as="span" fontWeight={"bold"} color={"gray.400"}>

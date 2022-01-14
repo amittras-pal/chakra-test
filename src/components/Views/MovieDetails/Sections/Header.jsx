@@ -34,7 +34,7 @@ function Header({ config, data }) {
       <Box
         maxH={{ base: "16rem", md: "20rem" }}
         maxW={{ base: "10rem", md: "14rem" }}
-        minH={{ base: "16rem", md: "20rem" }}
+        minH={{ base: "14rem", md: "20rem" }}
         minW={{ base: "10rem", md: "14rem" }}
         position={"relative"}
         display={"flex"}
