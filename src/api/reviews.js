@@ -1,8 +1,8 @@
 import axios from "../config/axios.config";
 import { ENDPOINTS } from "../constants/endpoints";
 
-export function getMovieReviews(movieId, page) {
-  return axios.get(`${ENDPOINTS.movieById}/${movieId}/reviews`, {
+export function getReviews(type, id, page) {
+  return axios.get(`/${type}/${id}/reviews`, {
     params: { page },
   });
 }

@@ -3,7 +3,9 @@ import React from "react";
 import MediaTile from "../../../shared/MediaTile/MediaTile";
 import SectionHeading from "../../../shared/SectionHeading/SectionHeading";
 
-function Recommendations({ items, type }) {
+function Recommendations({ data, type }) {
+  if (!data || data?.recommendations?.results.length === 0) return null;
+
   return (
     <Box mb={6}>
       <SectionHeading size={"md"}>Recommendations</SectionHeading>
@@ -13,7 +15,7 @@ function Recommendations({ items, type }) {
         overflowX={"auto"}
         p={4}
         gap={"1rem"}>
-        {items.map((movie) => (
+        {data?.recommendations?.results.map((movie) => (
           <MediaTile key={movie.id} data={movie} mediaType={type} />
         ))}
       </Flex>

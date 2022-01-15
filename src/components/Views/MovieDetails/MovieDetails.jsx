@@ -30,10 +30,7 @@ function MovieDetails() {
             <GridItem colSpan={[12, 9]}>
               <Overview data={movie?.data} />
               <Reviews data={movie?.data} config={config} />
-              <Recommendations
-                items={movie?.data?.recommendations?.results}
-                type={"movie"}
-              />
+              <Recommendations data={movie?.data} type={"movie"} />
             </GridItem>
             <GridItem colSpan={[12, 3]}></GridItem>
           </Grid>

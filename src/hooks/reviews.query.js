@@ -1,10 +1,10 @@
 import { useInfiniteQuery } from "react-query";
-import { getMovieReviews } from "../api/reviews";
+import { getReviews } from "../api/reviews";
 
-export function useMovieReviews(movieId) {
+export function useReviews(type, id) {
   return useInfiniteQuery(
-    ["movie-reviews", movieId],
-    ({ pageParam = 1 }) => getMovieReviews(movieId, pageParam),
+    ["movie-reviews", id],
+    ({ pageParam = 1 }) => getReviews(type, id, pageParam),
     {
       getNextPageParam: (last, all) =>
         last.data.total_pages > last.data.page ? last.data.page + 1 : undefined,

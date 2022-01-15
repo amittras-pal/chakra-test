@@ -1,19 +1,18 @@
-import {
-  Box,
-  Button,
-  Flex,
-  Modal,
-  Text,
-  useDisclosure,
-} from "@chakra-ui/react";
+import { Box, Button, Flex, Modal, Text } from "@chakra-ui/react";
 import React from "react";
 import { MdChevronRight } from "react-icons/md";
+import { useSearchParams } from "react-router-dom";
 import ReviewModalBody from "../../../shared/ModalBody/ReviewModalBody";
 import ReviewTile from "../../../shared/ReviewTile/ReviewTile";
 import SectionHeading from "../../../shared/SectionHeading/SectionHeading";
 
 function Reviews({ config, data }) {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [params, setParams] = useSearchParams();
+  const reviews = params.get("reviews");
+
+  const toggleModal = () => {
+    setParams(reviews ? {} : { reviews: true });
+  };
 
   return (
     <>
@@ -26,7 +25,7 @@ function Reviews({ config, data }) {
               size={"sm"}
               colorScheme={"red"}
               rightIcon={<MdChevronRight />}
-              onClick={onOpen}>
+              onClick={toggleModal}>
               Show All ({data?.reviews?.total_results})
             </Button>
           )}
@@ -41,8 +40,8 @@ function Reviews({ config, data }) {
           <Text>There are no reviews yet for {data?.title}</Text>
         )}
       </Box>
-      <Modal isOpen={isOpen} onClose={onClose} size={"full"}>
-        <ReviewModalBody title={data?.title} movieId={data?.id} />
+      <Modal isOpen={reviews} onClose={toggleModal} size={"full"}>
+        <ReviewModalBody title={data?.title} id={data?.id} type={"movie"} />
       </Modal>
     </>
   );

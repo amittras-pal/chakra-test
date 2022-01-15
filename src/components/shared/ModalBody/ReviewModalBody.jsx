@@ -11,13 +11,13 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { useMovieReviews } from "../../../hooks/reviews.query";
 import React from "react";
+import { useReviews } from "../../../hooks/reviews.query";
 import ReviewTile from "../ReviewTile/ReviewTile";
 
-function ReviewModalBody({ title, movieId }) {
+function ReviewModalBody({ title, type, id }) {
   const { data, hasNextPage, isLoading, isFetchingNextPage, fetchNextPage } =
-    useMovieReviews(movieId);
+    useReviews(type, id);
 
   return (
     <ModalContent
@@ -48,7 +48,7 @@ function ReviewModalBody({ title, movieId }) {
               colorScheme={"red"}
               isLoading={isFetchingNextPage}
               onClick={fetchNextPage}>
-              Load More
+              Read More
             </Button>
           )}
           {!hasNextPage && data?.pages?.[0]?.data.total_results > 0 && (
