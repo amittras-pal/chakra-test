@@ -13,7 +13,7 @@ import React, { useEffect, useState } from "react";
 import { MdFilterAlt } from "react-icons/md";
 import { useLocation } from "react-router-dom";
 import { useMovieDiscover } from "../../../../hooks/discover.query";
-import { useMovieGenres } from "../../../../hooks/genre.query";
+import { useGenres } from "../../../../hooks/genre.query";
 import { nFormatter, setPageTitle } from "../../../../utils/utils";
 import MediaTileWithInfo from "../../../shared/MediaTile/MediaTileWithInfo";
 import MovieFilters from "./MovieFilters";
@@ -25,8 +25,8 @@ function Movies() {
     ...state,
   });
   const { isOpen, onClose, onOpen } = useDisclosure();
-  const { data: genre } = useMovieGenres();
 
+  const { data: genre } = useGenres("movie");
   const { data, hasNextPage, fetchNextPage, isFetchingNextPage, isLoading } =
     useMovieDiscover(filters);
 

@@ -5,19 +5,19 @@ import {
   Drawer,
   Flex,
   Heading,
+  Text,
   useColorMode,
   useDisclosure,
-  Text,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
-import { useTvGenres } from "../../../../hooks/genre.query";
-import { useTvDiscover } from "../../../../hooks/discover.query";
-import { nFormatter, setPageTitle } from "../../../../utils/utils";
 import { MdFilterAlt } from "react-icons/md";
+import { useLocation } from "react-router-dom";
+import { tvSearchdateModes } from "../../../../constants/appConstants";
+import { useTvDiscover } from "../../../../hooks/discover.query";
+import { useGenres } from "../../../../hooks/genre.query";
+import { nFormatter, setPageTitle } from "../../../../utils/utils";
 import MediaTileWithInfo from "../../../shared/MediaTile/MediaTileWithInfo";
 import ShowsFilter from "./ShowsFilter";
-import { tvSearchdateModes } from "../../../../constants/appConstants";
 
 function ShowsList() {
   // React Hooks
@@ -27,7 +27,7 @@ function ShowsList() {
   const { colorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
   // Query Hooks.
-  const { data: genres } = useTvGenres();
+  const { data: genres } = useGenres("tv");
   const { data, hasNextPage, isFetchingNextPage, isLoading, fetchNextPage } =
     useTvDiscover(filters);
 

@@ -1,9 +1,5 @@
 import { useQuery } from "react-query";
-import { getPopularTvShows, getShowDetailsById } from "../api/tv";
-
-// export function usePopularTvShows() {
-//   return useQuery("popular-tv", getPopularTvShows);
-// }
+import { getShowDetailsById } from "../api/tv";
 
 export function useTvShowById(id) {
   return useQuery(["show", id], () => getShowDetailsById(id));

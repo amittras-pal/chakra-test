@@ -1,10 +1,6 @@
 import { useQuery } from "react-query";
-import { getMovieGenres, getTvGenres } from "../api/genre";
+import { getGenresList } from "../api/genre";
 
-export function useMovieGenres() {
-  return useQuery("movie-genres", getMovieGenres);
-}
-
-export function useTvGenres() {
-  return useQuery("tv-genres", getTvGenres);
+export function useGenres(type) {
+  return useQuery([type, "genre"], () => getGenresList(type));
 }
