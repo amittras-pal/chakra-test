@@ -19,7 +19,7 @@ function Reviews({ config, data }) {
       <Box mb={6}>
         <Flex width={"100%"} justifyContent={"space-between"} mb={4}>
           <SectionHeading size={"md"}>Reviews</SectionHeading>
-          {data?.reviews?.results.length > 0 && (
+          {data?.reviews?.results.length > 2 && (
             <Button
               variant={"ghost"}
               size={"sm"}
