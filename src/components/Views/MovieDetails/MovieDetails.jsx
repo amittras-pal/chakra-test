@@ -5,6 +5,7 @@ import { useApiConfig } from "../../../hooks/configuration.query";
 import { useMovieDetailsById } from "../../../hooks/movie.query";
 import { setPageTitle } from "../../../utils/utils";
 import Header from "./Sections/Header";
+import Media from "./Sections/Media";
 import Overview from "./Sections/Overview";
 import Recommendations from "./Sections/Recommendations";
 import Reviews from "./Sections/Reviews";
@@ -30,6 +31,7 @@ function MovieDetails() {
             <GridItem colSpan={[12, 9]}>
               <Overview data={movie?.data} />
               <Reviews data={movie?.data} config={config} />
+              <Media data={movie?.data} type={"movie"} />
               <Recommendations data={movie?.data} type={"movie"} />
             </GridItem>
             <GridItem colSpan={[12, 3]}></GridItem>
