@@ -13,7 +13,6 @@ import thumb from "../../../resources/image-thumb.svg";
 function ReviewTile({ review, config }) {
   const dividerColor = useColorModeValue("gray.300", "gray.600");
   const linkColor = useColorModeValue("yellow.600", "yellow.500");
-  const tileColor = useColorModeValue("gray.100", "gray.700");
 
   const [showAll, setShowAll] = useState(false);
 
@@ -29,7 +28,7 @@ function ReviewTile({ review, config }) {
       );
   };
   return (
-    <Box mb={4} boxShadow={"lg"} rounded={"lg"} bgColor={tileColor}>
+    <Box mb={4} borderWidth={"1px"} borderRadius={"lg"}>
       <Flex
         p={3}
         width={"full"}
