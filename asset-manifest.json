@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/chakra-test/static/css/main.a5ebdd56.css",
+    "main.js": "/chakra-test/static/js/main.5ee98390.js",
+    "static/media/hero-black.svg": "/chakra-test/static/media/hero-black.23605a5cb79e31ce427ab1a0282e574b.svg",
+    "static/media/hero-white.svg": "/chakra-test/static/media/hero-white.4b3c5a2916a5871fa5ef1f59b9f1616e.svg",
+    "static/media/tmdb.svg": "/chakra-test/static/media/tmdb.d1094b9cb231c0536496fd5a2fbef224.svg",
+    "index.html": "/chakra-test/index.html",
+    "static/media/image-thumb.svg": "/chakra-test/static/media/image-thumb.fbf534ac60b95a3848160defd9a809a9.svg",
+    "main.a5ebdd56.css.map": "/chakra-test/static/css/main.a5ebdd56.css.map",
+    "main.5ee98390.js.map": "/chakra-test/static/js/main.5ee98390.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a5ebdd56.css",
+    "static/js/main.5ee98390.js"
+  ]
+}
