@@ -1,7 +1,7 @@
 {
   "name": "chakra-test",
   "version": "0.1.0",
-  "homepage": "http://amittras-pal.github.io/chakra-test",
+  "homepage": "https://amittras-pal.github.io/chakra-test/",
   "private": true,
   "dependencies": {
     "@chakra-ui/react": "1.7.3",

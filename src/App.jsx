@@ -1,13 +1,13 @@
+import { HashRouter } from "react-router-dom";
 import AppHeader from "./components/Router/AppHeader";
-import { BrowserRouter } from "react-router-dom";
 import RouterOutlet from "./components/Router/RouterOutlet";
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <AppHeader />
       <RouterOutlet />
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 

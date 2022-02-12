@@ -72,16 +72,6 @@ const exploreRouterMenu = [
         },
         Icon: MdLocalFireDepartment,
       },
-      // {
-      //   path: "tv",
-      //   label: "Latest",
-      //   filterParams: {
-      //     ...defaultTvFilters,
-      //     sort_by: "first_air_date.desc",
-      //     "air_date.lte": DateTime.now().toISODate(),
-      //   },
-      //   Icon: MdOfflineBolt,
-      // },
       {
         path: "tv",
         label: "Top Rated",
