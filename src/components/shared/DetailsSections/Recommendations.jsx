@@ -1,7 +1,7 @@
 import { Box, Flex } from "@chakra-ui/react";
 import React from "react";
-import MediaTile from "../../../shared/MediaTile/MediaTile";
-import SectionHeading from "../../../shared/SectionHeading/SectionHeading";
+import MediaTile from "../MediaTile/MediaTile";
+import SectionHeading from "../SectionHeading/SectionHeading";
 
 function Recommendations({ data, type }) {
   if (!data || data?.recommendations?.results.length === 0) return null;
@@ -15,8 +15,8 @@ function Recommendations({ data, type }) {
         overflowX={"auto"}
         p={4}
         gap={"1rem"}>
-        {data?.recommendations?.results.map((movie) => (
-          <MediaTile key={movie.id} data={movie} mediaType={type} />
+        {data?.recommendations?.results.map((item) => (
+          <MediaTile key={item.id} data={item} mediaType={type} />
         ))}
       </Flex>
     </Box>

@@ -2,11 +2,11 @@ import { Box, Button, Flex, Modal, Text } from "@chakra-ui/react";
 import React from "react";
 import { MdChevronRight } from "react-icons/md";
 import { useSearchParams } from "react-router-dom";
-import ReviewModalBody from "../../../shared/ModalBody/ReviewModalBody";
-import ReviewTile from "../../../shared/ReviewTile/ReviewTile";
-import SectionHeading from "../../../shared/SectionHeading/SectionHeading";
+import ReviewModalBody from "../ModalBody/ReviewModalBody";
+import ReviewTile from "../ReviewTile/ReviewTile";
+import SectionHeading from "../SectionHeading/SectionHeading";
 
-function Reviews({ config, data }) {
+function Reviews({ config, data, titleKey }) {
   const [params, setParams] = useSearchParams();
   const reviews = params.get("reviews");
 
@@ -37,11 +37,15 @@ function Reviews({ config, data }) {
               <ReviewTile review={review} key={review.id} config={config} />
             ))
         ) : (
-          <Text>There are no reviews yet for {data?.title}</Text>
+          <Text>There are no reviews yet for {data?.[titleKey]}</Text>
         )}
       </Box>
       <Modal isOpen={reviews} onClose={toggleModal} size={"full"}>
-        <ReviewModalBody title={data?.title} id={data?.id} type={"movie"} />
+        <ReviewModalBody
+          title={data?.[titleKey]}
+          id={data?.id}
+          type={"movie"}
+        />
       </Modal>
     </>
   );

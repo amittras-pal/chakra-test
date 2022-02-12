@@ -7,10 +7,10 @@ import {
   useColorMode,
 } from "@chakra-ui/react";
 import React from "react";
-import RatingCircle from "../../../shared/RatingCircle/RatingCircle";
-import { ReactComponent as ImageThumb } from "../../../../resources/image-thumb.svg";
+import RatingCircle from "../RatingCircle/RatingCircle";
+import { ReactComponent as ImageThumb } from "../../../resources/image-thumb.svg";
 
-function Header({ config, data }) {
+function Header({ config, data, titleKey }) {
   const { colorMode } = useColorMode();
 
   const bgTint =
@@ -65,7 +65,7 @@ function Header({ config, data }) {
         </Box>
       </Box>
       <Heading textAlign={"center"} fontWeight={"bold"} size={"lg"} mt={4}>
-        {data?.title ? data.title : "Movie Title"}
+        {data?.[titleKey] ? data[titleKey] : "Title"}
       </Heading>
       <Text fontStyle={"italic"} my={1} textAlign={"center"}>
         {data?.tagline}

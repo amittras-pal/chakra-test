@@ -5,8 +5,8 @@ import {
   MdKeyboardArrowLeft,
   MdKeyboardArrowRight,
 } from "react-icons/md";
-import { useApiConfig } from "../../../../../hooks/configuration.query";
-import { createImageUrl, downloadImage } from "../../../../../utils/utils";
+import { useApiConfig } from "../../../../hooks/configuration.query";
+import { createImageUrl, downloadImage } from "../../../../utils/utils";
 
 function ImageGallery({ imageList, galleryType }) {
   const [currentImg, setCurrentImg] = useState(0);

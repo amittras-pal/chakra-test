@@ -8,7 +8,7 @@ import {
   Tabs,
   Text,
 } from "@chakra-ui/react";
-import { nFormatter } from "../../../../utils/utils";
+import { nFormatter } from "../../../utils/utils";
 import ImageGallery from "./MediaCarousels/ImageGallery";
 import VideoGallery from "./MediaCarousels/VideoGallery";
 
